@@ -14,6 +14,19 @@
   --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
   --sans: 'Montserrat', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --radius: 4px;
+  /* The booking widget (shared/booking.js) takes its look from these. */
+  --bk-accent: var(--ink);
+  --bk-accent-ink: #fff;
+  --bk-ink: var(--ink);
+  --bk-muted: var(--muted);
+  --bk-line: var(--line);
+  --bk-surface: var(--paper);
+  --bk-soft: #F5F1EA;
+  --bk-radius: 6px;
+  --bk-radius-sm: 4px;
+  --bk-radius-btn: 4px;
+  --bk-font: var(--sans);
+  --bk-display: var(--serif);
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -180,3 +193,6 @@ section { scroll-margin-top: 70px; }
 .wa-float { position: fixed; right: 18px; bottom: 18px; width: 54px; height: 54px; border-radius: 50%; background: #1F8F4E; color: #fff; display: grid; place-items: center;
   box-shadow: 0 8px 24px rgba(0,0,0,.25); z-index: 30; }
 .wa-float:hover { background: #18773F; }
+
+/* Booking widget: square chips to match the buttons. */
+[data-booking] .bk-chip { border-radius: var(--bk-radius-sm); }
