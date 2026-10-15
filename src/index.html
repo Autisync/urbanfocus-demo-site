@@ -203,8 +203,9 @@
     <section class="sale" id="venda" data-track-section="Imóveis à venda">
       <div class="wrap">
         <h2 class="section-title">Depois de comprarmos, recuperamos</h2>
-        <p class="section-sub">Cada imóvel que compramos é remodelado e volta ao mercado. Este está à venda agora.</p>
-        <article class="listing">
+        <p class="section-sub">Cada imóvel que compramos é remodelado e volta ao mercado. Estes estão à venda agora.</p>
+        <div id="listings" class="listings" hidden aria-live="polite"></div>
+        <article class="listing" id="listing-static">
           <div class="listing-photos">
             <img src="img/t2_cozinha.jpg" alt="Cozinha nova, branca, com placa, forno e máquina de lavar" class="ph-main">
             <img src="img/t2_wc.jpg" alt="Casa de banho com duche e revestimento em mármore">
@@ -292,5 +293,6 @@
 
   <script src="booking.js"></script>
   <script src="site.js"></script>
+  <script src="listings.js"></script>
 </body>
 </html>

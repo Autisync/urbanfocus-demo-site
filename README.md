@@ -11,6 +11,10 @@ Everything on it goes into the CRM account **Urban Focus**.
 - **Avaliação gratuita** (booking): service, person, day and time, booked into
   the `urbanfocus` calendar with a confirmation email.
 - **"Próxima avaliação livre"** under the hero is read live from the diary.
+- **Imóveis à venda** is read live from the CRM: every home published to the
+  website in the account shows here, and a new price, a reservation or a sale
+  shows within 20 seconds. Needs `LISTINGS_KEY` (below); without it the page
+  shows the T2 written into `index.html`.
 - WhatsApp button to their real number.
 
 No framework and no install. `build.mjs` copies `src/` to `dist/` and writes
@@ -20,12 +24,14 @@ No framework and no install. `build.mjs` copies `src/` to `dist/` and writes
 
 Import this repository, framework preset **Other**. Nothing else is needed:
 the build settings are in `vercel.json` and the defaults point at the live CRM.
-Optional environment variables: `TRACK_KEY`, `CRM_API_URL`, `CRM_APP_URL`,
-`BOOKING_SLUG`, `SITE_SLUG` (see `build.mjs`).
+Environment variable `LISTINGS_KEY`: in the CRM, Urban Focus account,
+**Properties › Website**, create the website key (`pk_…`) and paste it here.
+Optional: `TRACK_KEY`, `CRM_API_URL`, `CRM_APP_URL`, `BOOKING_SLUG`,
+`SITE_SLUG` (see `build.mjs`).
 
 The CRM account must exist first. On the server:
 `cd ~/autisync && docker compose exec crm-backend npm run demo:urbanfocus`
-(CRM commit 0b45399 or later). It creates the calendar and the published CRM
+(CRM commit fe5d41b or later). It creates the calendar and the published CRM
 site whose contact form this page posts to.
 
 ## Before a demo

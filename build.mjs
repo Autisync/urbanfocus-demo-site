@@ -7,6 +7,8 @@
 //   CRM_APP_URL   defaults to https://app.autisync.com (t.js, full booking page)
 //   BOOKING_SLUG  the CRM calendar, default urbanfocus
 //   SITE_SLUG     the CRM website whose contact form is used, default urbanfocus
+//   LISTINGS_KEY  Properties > Website key (pk_...). With it, "Imóveis à venda"
+//                 shows the homes published in the CRM, live. Public by design.
 import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 
 const DEFAULT_TRACK_KEY = '';
@@ -22,6 +24,7 @@ const config = {
   bookingSlug: process.env.BOOKING_SLUG || 'urbanfocus',
   siteSlug: process.env.SITE_SLUG || process.env.BOOKING_SLUG || 'urbanfocus',
   trackKey: process.env.TRACK_KEY ?? DEFAULT_TRACK_KEY,
+  listingsKey: process.env.LISTINGS_KEY || '',
 };
 writeFileSync('dist/config.js', `window.SITE_CONFIG = ${JSON.stringify(config)};\n`);
-console.log(`Built urbanfocus against ${config.api} (calendar ${config.bookingSlug})${config.trackKey ? ', visitors tracked' : ', no TRACK_KEY: visits are not counted'}`);
+console.log(`Built urbanfocus against ${config.api} (calendar ${config.bookingSlug})${config.trackKey ? ', visitors tracked' : ', no TRACK_KEY: visits are not counted'}${config.listingsKey ? ', homes live from the CRM' : ', no LISTINGS_KEY: shows the T2 in the page'}`);
