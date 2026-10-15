@@ -26,5 +26,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/imovel/:reference",
+      "destination": "/imovel"
+    }
   ]
 }

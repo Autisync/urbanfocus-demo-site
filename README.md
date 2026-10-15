@@ -11,7 +11,9 @@ Everything on it goes into the CRM account **Urban Focus**.
 - **Avaliação gratuita** (booking): service, person, day and time, booked into
   the `urbanfocus` calendar with a confirmation email.
 - **"Próxima avaliação livre"** under the hero is read live from the diary.
-- **Imóveis à venda** is read live from the CRM: every home published to the
+- **Imóveis à venda** (`/imoveis`, three of them on the home page, and one
+  page per home at `/imovel/UF-001` with photos, details and viewing booking
+  from the agent's diary) is read live from the CRM: every home published to the
   website in the account shows here, and a new price, a reservation or a sale
   shows within 20 seconds. Needs `LISTINGS_KEY` (below); without it the page
   shows the T2 written into `index.html`.

@@ -71,7 +71,7 @@
         <a href="#como">Como funciona</a>
         <a href="#situacoes">Situações</a>
         <a href="#avaliacao">Avaliação</a>
-        <a href="#venda">Imóveis à venda</a>
+        <a href="/imoveis">Imóveis à venda</a>
         <a href="#perguntas">Perguntas</a>
       </nav>
       <a class="btn btn-gold nav-cta" href="#proposta">Pedir proposta</a>
@@ -199,36 +199,29 @@
       </div>
     </section>
 
-    <!-- What happens to a house after we buy it: the T2 in Castanheira. -->
-    <section class="sale" id="venda" data-track-section="Imóveis à venda">
+    <!-- What happens to a house after we buy it. The cards are read live from
+         the CRM (listings.js); the one below shows until they load. -->
+    <section class="sale" id="venda" data-track-section="Imóveis à venda" data-homes-preview>
       <div class="wrap">
-        <h2 class="section-title">Depois de comprarmos, recuperamos</h2>
-        <p class="section-sub">Cada imóvel que compramos é remodelado e volta ao mercado. Estes estão à venda agora.</p>
-        <div id="listings" class="listings" hidden aria-live="polite"></div>
-        <article class="listing" id="listing-static">
-          <div class="listing-photos">
-            <img src="img/t2_cozinha.jpg" alt="Cozinha nova, branca, com placa, forno e máquina de lavar" class="ph-main">
-            <img src="img/t2_wc.jpg" alt="Casa de banho com duche e revestimento em mármore">
-            <img src="img/t2_sala.jpg" alt="Sala com pavimento novo, em fase de acabamentos">
-            <img src="img/t2_varanda.jpg" alt="Varanda de 19,8 m² com vista sobre a Castanheira do Ribatejo" class="ph-wide">
+        <div class="sale-head">
+          <div>
+            <h2 class="section-title">Depois de comprarmos, recuperamos</h2>
+            <p class="section-sub">Cada imóvel que compramos é remodelado e volta ao mercado. Estes estão à venda agora.</p>
           </div>
-          <div class="listing-info">
-            <p class="eyebrow">Centro da Castanheira do Ribatejo</p>
-            <h3>T2 totalmente remodelado</h3>
-            <p class="price">219.000 €</p>
-            <dl class="facts">
-              <div><dt>Área</dt><dd>61,20 m²</dd></div>
-              <div><dt>Varanda</dt><dd>19,80 m²</dd></div>
-              <div><dt>Piso</dt><dd>2.º, sem elevador</dd></div>
-              <div><dt>Estado</dt><dd>Em acabamentos</dd></div>
-            </dl>
-            <p>Cozinha equipada, casa de banho nova e pavimento novo em todo o apartamento. A varanda é quase uma terceira divisão, com vista desafogada sobre a vila.</p>
-            <div class="listing-actions">
-              <a class="btn btn-dark" href="#avaliacao" data-book="Visita ao T2 da Castanheira">Marcar visita</a>
-              <a class="btn btn-line" href="tel:+351965156475">965 156 475</a>
+          <a class="btn btn-line" href="/imoveis" data-homes-more><span>Ver todos os imóveis (<span data-count>1</span>)</span></a>
+        </div>
+        <div class="home-grid" data-homes-grid hidden></div>
+        <div class="home-grid" data-homes-fallback>
+          <a class="home-card" href="#avaliacao" data-book="Visita ao T2 da Castanheira">
+            <div class="home-card-photo"><img src="img/t2_cozinha.jpg" alt=""></div>
+            <div class="home-card-body">
+              <p class="home-card-where">Centro, Castanheira do Ribatejo</p>
+              <h3>T2 totalmente remodelado</h3>
+              <p class="home-card-meta">T2 · 61,20 m² · varanda de 19,80 m²</p>
+              <p class="home-card-price">219.000 €</p>
             </div>
-          </div>
-        </article>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -278,7 +271,7 @@
       </div>
       <div>
         <h3>Atalhos</h3>
-        <p><a href="#proposta">Pedir proposta</a><br><a href="#avaliacao">Marcar avaliação</a><br><a href="#venda">Imóveis à venda</a></p>
+        <p><a href="#proposta">Pedir proposta</a><br><a href="#avaliacao">Marcar avaliação</a><br><a href="/imoveis">Imóveis à venda</a></p>
       </div>
     </div>
     <div class="wrap footer-base">

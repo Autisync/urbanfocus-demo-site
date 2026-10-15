@@ -141,24 +141,92 @@ section { scroll-margin-top: 70px; }
 @media (max-width: 900px) { .book-in { grid-template-columns: 1fr; } }
 
 .sale { background: var(--paper); }
-.listing { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 36px; align-items: start; }
-.listing-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.listing-photos img { width: 100%; height: 180px; object-fit: cover; border-radius: 3px; }
-.listing-photos .ph-main { grid-column: 1 / -1; height: 300px; }
-.listing-photos .ph-wide { grid-column: 1 / -1; height: 150px; }
-.listing-info h3 { font-family: var(--serif); font-weight: 500; font-size: 32px; }
+.sale-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+.sale-head .section-sub { margin-bottom: 0; }
+[hidden] { display: none !important; }
+
+/* Home cards: the home page shows three, /imoveis shows them all. */
+.home-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 980px) { .home-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .home-grid { grid-template-columns: 1fr; } }
+.home-card { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--ink); transition: border-color .15s, box-shadow .15s; }
+.home-card:hover { border-color: var(--ink); box-shadow: 0 10px 28px rgba(19,22,26,.10); }
+.home-card-photo { position: relative; aspect-ratio: 4 / 3; background: var(--stone-2); }
+.home-card-photo img { width: 100%; height: 100%; object-fit: cover; }
+.home-card-body { padding: 18px 20px 20px; display: grid; gap: 6px; }
+.home-card-where { margin: 0; font-size: 13px; color: var(--gold-deep); font-weight: 600; }
+.home-card h3 { font-family: var(--serif); font-weight: 500; font-size: 21px; line-height: 1.25; }
+.home-card-meta { margin: 0; font-size: 14px; color: var(--muted); }
+.home-card-price { margin: 6px 0 0; font-family: var(--serif); font-size: 24px; color: var(--ink); }
+.home-card.is-closed .home-card-photo img { filter: grayscale(.7); opacity: .8; }
+.no-photo { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; }
+.tag { position: absolute; left: 12px; top: 12px; padding: 5px 10px; font: 600 12px/1.2 var(--sans); background: var(--ink); color: #fff; border-radius: 3px; }
+.tag-closed { background: var(--gold-deep); }
+.home-price .tag { position: static; display: inline-block; vertical-align: middle; margin-right: 10px; font-size: 13px; }
+.skel { min-height: 340px; background: linear-gradient(90deg, var(--stone-2), #EDE9E3, var(--stone-2)); background-size: 200% 100%; animation: skel 1.4s ease-in-out infinite; border-color: transparent; }
+@keyframes skel { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .skel { animation: none; } }
+.homes-empty { grid-column: 1 / -1; background: var(--paper); border: 1px solid var(--line); padding: 32px; border-radius: var(--radius); }
+.homes-empty p:last-child { margin: 0; }
+
+/* /imoveis and /imovel/REF */
+.homes-page, .home-page { padding: 40px 0 80px; }
+.crumbs { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+.crumbs a { color: var(--ink-2); }
+.nav-links a[aria-current="page"] { color: var(--gold-deep); }
+.home-loading { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 36px; }
+.skel-photo { aspect-ratio: 3 / 2; min-height: 0; }
+@media (max-width: 900px) { .home-loading { grid-template-columns: 1fr; } }
+.home-top { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+@media (max-width: 900px) { .home-top { grid-template-columns: 1fr; gap: 24px; } }
+.gallery { display: grid; gap: 10px; min-width: 0; }
+.gallery-main { position: relative; aspect-ratio: 3 / 2; background: var(--ink); border-radius: var(--radius); overflow: hidden; }
+.gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+.gal-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); color: var(--ink); font-size: 26px; line-height: 1; cursor: pointer; }
+.gal-prev { left: 12px; } .gal-next { right: 12px; }
+.gal-count { position: absolute; right: 12px; bottom: 12px; background: rgba(19,22,26,.75); color: #fff; font-size: 13px; padding: 4px 10px; border-radius: 3px; font-variant-numeric: tabular-nums; }
+.gallery-thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: 96px; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.gallery-thumbs button { padding: 0; border: 2px solid transparent; border-radius: 3px; background: none; cursor: pointer; aspect-ratio: 4 / 3; overflow: hidden; }
+.gallery-thumbs button[aria-current="true"] { border-color: var(--ink); }
+.gallery-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.home-panel { position: sticky; top: 96px; }
+@media (max-width: 900px) { .home-panel { position: static; } }
+.home-panel h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 3vw, 36px); line-height: 1.15; margin-bottom: 10px; }
+.home-price { font-family: var(--serif); font-size: 32px; color: var(--gold-deep); margin: 0 0 18px; }
+.home-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.home-actions .btn-dark { flex: 1 1 100%; }
+.home-closed { background: var(--stone-2); padding: 14px 16px; border-left: 3px solid var(--gold); }
+.ref { margin: 14px 0 0; font-size: 12px; color: var(--muted); }
+.home-bottom { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 40px; margin-top: 48px; align-items: start; }
+@media (max-width: 900px) { .home-bottom { grid-template-columns: 1fr; } }
+.home-text h2 { font-family: var(--serif); font-weight: 500; font-size: 26px; margin: 0 0 12px; }
+.home-text h2 + p { margin-top: 0; }
+.home-text p { max-width: 68ch; }
+.home-text h2:not(:first-child) { margin-top: 32px; }
+.features { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.features li { background: var(--paper); border: 1px solid var(--line); padding: 6px 12px; border-radius: 3px; font-size: 14px; }
+.visit { padding: 26px; scroll-margin-top: 96px; box-shadow: none; border: 1px solid var(--line); border-top: 4px solid var(--gold); }
+.visit h2 { font-family: var(--serif); font-weight: 500; font-size: 26px; margin-bottom: 4px; }
+.visit-days, .visit-slots { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+.visit-days button, .visit-slots button { font: 500 14px var(--sans); padding: 9px 12px; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 3px; cursor: pointer; font-variant-numeric: tabular-nums; }
+.visit-days button:hover, .visit-slots button:hover { border-color: var(--ink); }
+.visit-days button[aria-pressed="true"], .visit-slots button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.visit-slots button { min-width: 72px; }
+.visit-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 14px; margin-top: 20px; }
+.visit-form .btn, .visit-form .status { grid-column: 1 / -1; }
+.visit-form textarea { width: 100%; border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; font: 400 15px var(--sans); color: var(--ink); resize: vertical; }
+.visit-form textarea:focus { border-color: var(--gold-deep); outline: none; box-shadow: 0 0 0 3px rgba(184,147,90,.25); }
+.opt { font-weight: 400; color: var(--muted); }
+@media (max-width: 480px) { .visit-form { grid-template-columns: 1fr; } .visit { padding: 20px; } }
+.visit-done { margin-top: 18px; background: #EEF5EF; border-left: 3px solid #1F6B3A; padding: 16px; }
+.visit-done h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; margin-bottom: 4px; }
+.visit-done p { margin: 0; }
+
 .price { font-family: var(--serif); font-size: 30px; color: var(--gold-deep); margin: 6px 0 16px; }
 .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 0 0 16px; border-top: 1px solid var(--line); }
 .facts div { padding: 10px 0; border-bottom: 1px solid var(--line); }
 .facts dt { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 .facts dd { margin: 0; font-weight: 600; }
-.listing-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-@media (max-width: 900px) { .listing { grid-template-columns: 1fr; } }
-.listings { display: grid; gap: 56px; }
-.listing[hidden], .listings[hidden] { display: none; }
-.listing .tag { display: inline-block; vertical-align: middle; margin-right: 8px; padding: 4px 10px; font: 600 12px/1.2 var(--sans, sans-serif); letter-spacing: .06em; text-transform: uppercase; background: var(--ink, #13161A); color: #fff; border-radius: 2px; }
-.listing .ref { margin-top: 14px; font-size: 12px; color: var(--muted); }
-.listing.is-closed .listing-photos { filter: grayscale(.6); opacity: .85; }
 
 .areas { background: var(--stone); }
 .area-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 12px; }
