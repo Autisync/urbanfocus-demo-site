@@ -151,8 +151,9 @@ section { scroll-margin-top: 70px; }
 @media (max-width: 620px) { .home-grid { grid-template-columns: 1fr; } }
 .home-card { display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--ink); transition: border-color .15s, box-shadow .15s; }
 .home-card:hover { border-color: var(--ink); box-shadow: 0 10px 28px rgba(19,22,26,.10); }
-.home-card-photo { position: relative; aspect-ratio: 4 / 3; background: var(--stone-2); }
-.home-card-photo img { width: 100%; height: 100%; object-fit: cover; }
+.home-card-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--stone-2); }
+/* Absolute, so a tall (portrait) photo is cropped to the frame instead of stretching the card. */
+.home-card-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .home-card-body { padding: 18px 20px 20px; display: grid; gap: 6px; }
 .home-card-where { margin: 0; font-size: 13px; color: var(--gold-deep); font-weight: 600; }
 .home-card h3 { font-family: var(--serif); font-weight: 500; font-size: 21px; line-height: 1.25; }
@@ -181,7 +182,7 @@ section { scroll-margin-top: 70px; }
 @media (max-width: 900px) { .home-top { grid-template-columns: 1fr; gap: 24px; } }
 .gallery { display: grid; gap: 10px; min-width: 0; }
 .gallery-main { position: relative; aspect-ratio: 3 / 2; background: var(--ink); border-radius: var(--radius); overflow: hidden; }
-.gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .gal-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); color: var(--ink); font-size: 26px; line-height: 1; cursor: pointer; }
 .gal-prev { left: 12px; } .gal-next { right: 12px; }
 .gal-count { position: absolute; right: 12px; bottom: 12px; background: rgba(19,22,26,.75); color: #fff; font-size: 13px; padding: 4px 10px; border-radius: 3px; font-variant-numeric: tabular-nums; }
