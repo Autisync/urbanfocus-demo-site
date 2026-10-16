@@ -79,7 +79,7 @@ p { margin: 0 0 12px; }
 .hero { position: relative; color: #fff; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(19,22,26,.92) 0%, rgba(19,22,26,.78) 45%, rgba(19,22,26,.45) 100%),
-    url('https://images.pexels.com/photos/36175373/pexels-photo-36175373.jpeg?auto=compress&cs=tinysrgb&w=1800') center 60% / cover no-repeat, var(--ink); }
+    url('img/hero-ponte.jpg') center / cover no-repeat, var(--ink); }
 .hero-in { position: relative; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 48px; align-items: center; padding: 64px 20px 72px; }
 .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(36px, 5vw, 60px); line-height: 1.05; margin-bottom: 20px; }
 .hero .eyebrow { color: #D9BE8C; }
@@ -406,7 +406,7 @@ section { scroll-margin-top: 70px; }
 .entrance-room { position: absolute; inset: 0; overflow: hidden; background: #2A2E33; }
 .room-photo { position: absolute; inset: 0; transform: scale(1.28); transform-origin: 50% 55%; will-change: transform;
   background: linear-gradient(180deg, rgba(19,22,26,.25), rgba(19,22,26,.55)),
-    url('https://images.pexels.com/photos/2030037/pexels-photo-2030037.jpeg?auto=compress&cs=tinysrgb&w=1800') center / cover no-repeat, #3A3631; }
+    url('img/entrada-sala.jpg') center / cover no-repeat, #3A3631; }
 .entrance-room::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: linear-gradient(180deg, transparent, rgba(19,22,26,.72)); pointer-events: none; }
 .room-text { z-index: 1; position: absolute; left: 0; right: 0; bottom: 16%; text-align: center; color: #fff; padding: 0 20px; opacity: 0; }
 .room-kicker { font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #E2C792; margin-bottom: 10px; }
