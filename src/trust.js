@@ -7,6 +7,13 @@
  * Only publish a story with the person's permission. First name and town are
  * enough; a photo is optional.
  */
+// Real numbers only, shown under the hero, e.g. as on homebuyers.pt.
+window.UF_STATS = [
+  // { value: '40+', label: 'Imóveis comprados' },
+  // { value: '5', label: 'Anos de experiência' },
+  // { value: '24 h', label: 'Para a proposta escrita' },
+];
+
 window.UF_TEAM = [
   // { name: 'Luís', role: 'Fundador · Aquisições', photo: '/img/equipa/luis.jpg', line: 'Visito cada imóvel e faço a proposta.' },
 ];
@@ -19,6 +26,7 @@ window.UF_STORIES = [
   //   name: 'Maria',
   //   solved: 'O que fizemos: falámos com os três irmãos, tratámos da habilitação e fizemos a escritura em 5 semanas.',
   //   photo: '',  // optional, e.g. '/img/casos/alhandra.jpg'
+  //   video: '',  // optional, a vertical video testimonial, e.g. '/videos/maria.mp4' (with photo as its poster)
   // },
 ];
 
@@ -31,6 +39,12 @@ window.UF_STORIES = [
   }
   function ready(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
   ready(function () {
+    var stats = (window.UF_STATS || []).filter(function (x) { return x && x.value; });
+    var st = document.querySelector('[data-stats]');
+    if (st && stats.length) {
+      st.innerHTML = stats.map(function (x) { return '<div><dt>' + esc(x.label) + '</dt><dd>' + esc(x.value) + '</dd></div>'; }).join('');
+      st.hidden = false;
+    }
     var team = (window.UF_TEAM || []).filter(function (m) { return m && m.name; });
     var t = document.querySelector('[data-team]');
     if (t && team.length) {
@@ -40,14 +54,17 @@ window.UF_STORIES = [
       }).join('') + '</div>';
       t.hidden = false;
     }
-    var stories = (window.UF_STORIES || []).filter(function (s) { return s && s.quote; });
+    var stories = (window.UF_STORIES || []).filter(function (s) { return s && (s.quote || s.video); });
     var sec = document.querySelector('[data-stories]');
     var grid = document.querySelector('[data-story-grid]');
     if (sec && grid && stories.length) {
       grid.innerHTML = stories.map(function (s) {
-        return '<article class="story">' + (s.photo ? '<img src="' + esc(s.photo) + '" alt="" loading="lazy">' : '') +
+        var media = s.video
+          ? '<video class="story-video" src="' + esc(s.video) + '"' + (s.photo ? ' poster="' + esc(s.photo) + '"' : '') + ' controls playsinline preload="none"></video>'
+          : (s.photo ? '<img src="' + esc(s.photo) + '" alt="" loading="lazy">' : '');
+        return '<article class="story' + (s.video ? ' has-video' : '') + '">' + media +
           '<p class="story-sit">' + esc(s.situation || '') + (s.place ? ' · ' + esc(s.place) : '') + '</p>' +
-          '<blockquote>' + esc(s.quote) + '</blockquote>' +
+          (s.quote ? '<blockquote>' + esc(s.quote) + '</blockquote>' : '') +
           '<p class="story-name">' + esc(s.name || '') + '</p>' +
           (s.solved ? '<p class="story-solved">' + esc(s.solved) + '</p>' : '') + '</article>';
       }).join('');

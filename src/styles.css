@@ -364,3 +364,38 @@ section { scroll-margin-top: 70px; }
 
 /* The booking box clears the sticky menu when scrolled to. */
 [data-booking] { scroll-margin-top: 120px; }
+
+/* Comparison table: the Urban Focus column stands out (as on homebuyers.pt). */
+.cmp-table-wrap { overflow-x: auto; }
+.cmp-table { width: 100%; min-width: 560px; border-collapse: separate; border-spacing: 0; font-size: 15px; }
+.cmp-table th, .cmp-table td { padding: 15px 18px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.cmp-table thead th { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-bottom: 0; padding-bottom: 12px; }
+.cmp-table tbody th { font-weight: 600; color: var(--ink-2); width: 30%; }
+.cmp-table td { color: var(--muted); width: 35%; }
+.cmp-table .us { background: var(--ink); color: #fff; font-weight: 600; border-bottom-color: rgba(255,255,255,.12); }
+.cmp-table thead .us { color: var(--goldl, #D9BC8C); border-radius: 6px 6px 0 0; padding-top: 18px; }
+.cmp-table tbody tr:last-child .us { border-radius: 0 0 6px 6px; border-bottom: 0; }
+.cmp-table tbody tr:nth-child(even) th, .cmp-table tbody tr:nth-child(even) td:not(.us) { background: var(--stone); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.cmp-cta { margin: 28px 0 0; }
+
+/* Como funciona with photos */
+.how-in { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
+.how-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.how-photos img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius); }
+.how-photos img:last-child { margin-top: 48px; }
+.how-in .steps { grid-template-columns: 1fr; gap: 22px; margin-bottom: 28px; }
+.how-in .steps li { display: grid; grid-template-columns: 56px 1fr; column-gap: 16px; border-top: 0; padding-top: 0; }
+.how-in .steps li::before { grid-row: span 2; font-size: 34px; margin: 0; }
+.how-in .steps h3, .how-in .steps p { grid-column: 2; }
+@media (max-width: 900px) { .how-in { grid-template-columns: 1fr; gap: 32px; } .how-photos { max-width: 520px; } }
+
+/* Hero stats */
+.hero-stats { display: flex; flex-wrap: wrap; gap: 28px; margin: 0 0 24px; }
+.hero-stats div { display: flex; flex-direction: column-reverse; }
+.hero-stats dd { margin: 0; font-family: var(--serif); font-size: 34px; color: #D9BE8C; line-height: 1.1; }
+.hero-stats dt { font-size: 13px; color: #CFC8BD; }
+
+/* Video testimonials */
+.story-video { width: calc(100% + 48px); margin: -24px -24px 6px; aspect-ratio: 9 / 16; max-height: 520px; object-fit: cover; background: var(--ink); }
+@media (max-width: 600px) { .cmp-table { min-width: 0; font-size: 13px; } .cmp-table th, .cmp-table td { padding: 11px 9px; } .cmp-table thead th { font-size: 11px; letter-spacing: .03em; } .cmp-table tbody th { width: 32%; } }

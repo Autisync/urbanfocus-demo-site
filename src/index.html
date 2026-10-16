@@ -109,6 +109,7 @@
             <span>Próxima avaliação livre: <b data-nf-day></b> às <b data-nf-time></b><span data-nf-if-staff> com <span data-nf-staff></span></span></span>
             <button type="button" class="btn btn-gold btn-sm" data-nf-take hidden>Marcar esta hora</button>
           </p>
+          <dl class="hero-stats" data-stats hidden></dl>
           <div class="hero-actions">
             <a class="btn btn-ghost" href="tel:+351965156475">Ligar 965 156 475</a>
             <a class="btn btn-ghost" href="https://wa.me/351965156475?text=Ol%C3%A1%2C%20tenho%20um%20im%C3%B3vel%20para%20vender." target="_blank" rel="noopener">WhatsApp</a>
@@ -188,49 +189,49 @@
             <span class="tc-val">24 horas</span>
           </div>
         </figure>
-        <div class="vs">
-          <div class="vs-col vs-them">
-            <h3>Imobiliária tradicional</h3>
-            <ul>
-              <li><b>Cerca de 6 meses</b> à espera de um comprador</li>
-              <li><b>Comissão</b> de 5% + IVA sobre o preço de venda</li>
-              <li><b>Dezenas de visitas</b> de desconhecidos em sua casa</li>
-              <li><b>Obras e certificados</b> por sua conta antes de vender</li>
-              <li>O negócio cai se o crédito do comprador não for aprovado</li>
-            </ul>
-          </div>
-          <div class="vs-col vs-us">
-            <h3>Urban Focus</h3>
-            <ul>
-              <li><b>Resposta em 24 horas</b>, com a proposta por escrito</li>
-              <li><b>Dinheiro na mão</b> na escritura, sem depender de bancos</li>
-              <li><b>0 € de comissões</b> e as despesas da compra são nossas</li>
-              <li><b>Uma só visita</b>: a nossa, à hora que escolher</li>
-              <li><b>Sem chatices</b>: compramos como está e tratamos da papelada</li>
-            </ul>
-            <a class="btn btn-gold" href="#proposta">Pedir proposta grátis</a>
-          </div>
+        <div class="cmp-table-wrap">
+          <table class="cmp-table">
+            <thead><tr><th scope="col"><span class="sr">Comparação</span></th><th scope="col" class="us">Urban Focus</th><th scope="col">Imobiliária tradicional</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Resposta com proposta</th><td class="us">24 horas</td><td>Semanas ou meses</td></tr>
+              <tr><th scope="row">Tempo até vender</th><td class="us">Na data que escolher</td><td>Cerca de 6 meses</td></tr>
+              <tr><th scope="row">Comissão</th><td class="us">0 €</td><td>5% + IVA</td></tr>
+              <tr><th scope="row">Obras e reparações</th><td class="us">0 €, compramos como está</td><td>Por sua conta</td></tr>
+              <tr><th scope="row">Visitas à sua casa</th><td class="us">1</td><td>Dezenas</td></tr>
+              <tr><th scope="row">Pagamento</th><td class="us">Na escritura, sem depender de bancos</td><td>Depende do crédito do comprador</td></tr>
+              <tr><th scope="row">Papelada</th><td class="us">Tratamos nós</td><td>Por sua conta</td></tr>
+            </tbody>
+          </table>
         </div>
+        <p class="cmp-cta"><a class="btn btn-gold" href="#proposta">Pedir proposta grátis</a></p>
       </div>
     </section>
 
     <section class="how" id="como" data-track-section="Como funciona">
-      <div class="wrap">
-        <h2 class="section-title">Como funciona</h2>
-        <ol class="steps">
-          <li>
-            <h3>Fale connosco</h3>
-            <p>Pelo formulário, por telefone ou WhatsApp. Diga-nos onde fica o imóvel e em que situação está. Não precisa de documentos nem de fotografias.</p>
-          </li>
-          <li>
-            <h3>Visita e proposta em 24 horas</h3>
-            <p>Marcamos uma avaliação gratuita no local à hora que lhe der jeito. No dia seguinte recebe a proposta por escrito, com o valor e os prazos.</p>
-          </li>
-          <li>
-            <h3>Escritura e pagamento</h3>
-            <p>Se aceitar, tratamos do CPCV, das certidões e da escritura. Recebe o valor na escritura, na data que escolher. Se não aceitar, não paga nada.</p>
-          </li>
-        </ol>
+      <div class="wrap how-in">
+        <div class="how-photos" aria-hidden="true">
+          <img src="img/aperto.jpg" alt="" loading="lazy" width="640" height="774">
+          <img src="img/chaves.jpg" alt="" loading="lazy" width="640" height="800">
+        </div>
+        <div>
+          <h2 class="section-title">Como funciona</h2>
+          <p class="section-sub">Três passos, do primeiro contacto à escritura.</p>
+          <ol class="steps">
+            <li>
+              <h3>Fale connosco</h3>
+              <p>Pelo formulário, por telefone ou WhatsApp. Diga-nos onde fica o imóvel e em que situação está. Não precisa de documentos nem de fotografias.</p>
+            </li>
+            <li>
+              <h3>Visita e proposta em 24 horas</h3>
+              <p>Marcamos uma avaliação gratuita no local à hora que lhe der jeito. No dia seguinte recebe a proposta por escrito, com o valor e os prazos.</p>
+            </li>
+            <li>
+              <h3>Escritura e pagamento</h3>
+              <p>Se aceitar, tratamos do CPCV, das certidões e da escritura. Recebe o valor na escritura, na data que escolher. Se não aceitar, não paga nada.</p>
+            </li>
+          </ol>
+          <a class="btn btn-dark" href="#proposta">Pedir proposta</a>
+        </div>
       </div>
     </section>
 
