@@ -92,6 +92,28 @@
   </header>
 
   <main id="top">
+    <!-- The entrance: two doors that open as the visitor scrolls, and the
+         camera walks in. Skipped for reduced motion (entrance.js). -->
+    <section class="entrance" aria-label="Entrada" data-entrance>
+      <div class="entrance-stage">
+        <div class="entrance-room" aria-hidden="true">
+          <div class="room-photo"></div>
+          <div class="room-text">
+            <p class="room-kicker">Bem-vindo à Urban Focus</p>
+            <p class="room-title">A forma simples de vender a sua casa.</p>
+          </div>
+        </div>
+        <div class="door door-l" aria-hidden="true"><span class="door-panel"></span><span class="door-panel"></span><span class="door-handle"></span><span class="door-mono"><img src="img/monograma-claro.svg" alt=""></span></div>
+        <div class="door door-r" aria-hidden="true"><span class="door-panel"></span><span class="door-panel"></span><span class="door-handle"></span><span class="door-mono"><img src="img/monograma-claro.svg" alt=""></span></div>
+        <div class="door-copy">
+          <p class="door-brand">URBAN FOCUS</p>
+          <p class="door-title">Compramos a sua casa.</p>
+          <p class="door-hint">Deslize para entrar <span aria-hidden="true">↓</span></p>
+        </div>
+        <a class="entrance-skip" href="#proposta">Saltar e pedir proposta</a>
+      </div>
+    </section>
+
     <!-- Hero: the promise on the left, the form that keeps it on the right. -->
     <section class="hero" data-track-section="Hero">
       <div class="hero-bg" aria-hidden="true"></div>
@@ -366,5 +388,6 @@
   <script src="booking.js"></script>
   <script src="site.js"></script>
   <script src="trust.js"></script>
+  <script src="entrance.js"></script>
 </body>
 </html>

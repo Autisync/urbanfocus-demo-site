@@ -399,3 +399,47 @@ section { scroll-margin-top: 70px; }
 /* Video testimonials */
 .story-video { width: calc(100% + 48px); margin: -24px -24px 6px; aspect-ratio: 9 / 16; max-height: 520px; object-fit: cover; background: var(--ink); }
 @media (max-width: 600px) { .cmp-table { min-width: 0; font-size: 13px; } .cmp-table th, .cmp-table td { padding: 11px 9px; } .cmp-table thead th { font-size: 11px; letter-spacing: .03em; } .cmp-table tbody th { width: 32%; } }
+
+/* ── The entrance: doors that open on scroll ── */
+.entrance { position: relative; height: 230vh; background: var(--ink); }
+.entrance-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; perspective: 1400px; perspective-origin: 50% 45%; }
+.entrance-room { position: absolute; inset: 0; overflow: hidden; background: #2A2E33; }
+.room-photo { position: absolute; inset: 0; transform: scale(1.28); transform-origin: 50% 55%; will-change: transform;
+  background: linear-gradient(180deg, rgba(19,22,26,.25), rgba(19,22,26,.55)),
+    url('https://images.pexels.com/photos/2030037/pexels-photo-2030037.jpeg?auto=compress&cs=tinysrgb&w=1800') center / cover no-repeat, #3A3631; }
+.room-text { position: absolute; left: 0; right: 0; bottom: 18%; text-align: center; color: #fff; padding: 0 20px; opacity: 0; }
+.room-kicker { font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #E2C792; margin-bottom: 10px; }
+.room-title { font-family: var(--serif); font-weight: 500; font-size: clamp(32px, 5vw, 64px); line-height: 1.08; max-width: 18ch; margin: 0 auto; text-wrap: balance; }
+.door { position: absolute; top: 0; bottom: 0; width: 50%; background: linear-gradient(90deg, #171A1F, #1E2228 60%, #171A1F); will-change: transform; backface-visibility: hidden;
+  display: grid; grid-template-rows: 1fr 1.3fr; gap: 3.5vh; padding: 9vh 5vw 11vh; box-shadow: inset 0 0 0 1px rgba(184,147,90,.25); }
+.door::after { content: ''; position: absolute; inset: 0; background: #000; opacity: var(--shade, 0); pointer-events: none; }
+.door-l { left: 0; transform-origin: left center; }
+.door-r { right: 0; transform-origin: right center; }
+.door-panel { border: 1px solid rgba(184,147,90,.45); box-shadow: inset 0 0 0 10px #1A1D22, inset 0 0 0 11px rgba(184,147,90,.22); }
+.door-handle { position: absolute; top: 50%; width: 6px; height: 120px; margin-top: -60px; border-radius: 3px; background: linear-gradient(180deg, #E2C792, #B8935A 55%, #8C6C3A); box-shadow: 0 2px 8px rgba(0,0,0,.5); }
+.door-l .door-handle { right: 22px; } .door-r .door-handle { left: 22px; }
+/* The monogram straddles the seam: each door shows its half. */
+.door-mono { position: absolute; top: 50%; width: 120px; height: 120px; margin-top: -170px; overflow: hidden; }
+.door-mono img { width: 120px; height: 120px; max-width: none; position: absolute; top: 0; opacity: .85; }
+.door-l .door-mono { right: 0; width: 60px; } .door-l .door-mono img { left: 0; }
+.door-r .door-mono { left: 0; width: 60px; } .door-r .door-mono img { left: -60px; }
+.door-copy { position: absolute; left: 0; right: 0; bottom: 9vh; text-align: center; color: #fff; padding: 0 20px; pointer-events: none; }
+.door-brand { font-size: 13px; font-weight: 600; letter-spacing: .32em; color: #E2C792; margin-bottom: 10px; }
+.door-title { font-family: var(--serif); font-weight: 500; font-size: clamp(34px, 5.2vw, 66px); line-height: 1.05; margin: 0 0 14px; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.door-hint { font-size: 14px; color: #CFC8BD; margin: 0; }
+.door-hint span { display: inline-block; animation: hint 1.6s ease-in-out infinite; }
+@keyframes hint { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+.entrance-skip { position: absolute; right: 20px; top: 84px; z-index: 3; font-size: 13px; color: #E7E2DA; text-decoration: underline; text-underline-offset: 3px; background: rgba(19,22,26,.55); padding: 8px 12px; border-radius: 3px; }
+@media (max-width: 700px) {
+  .entrance { height: 200vh; }
+  .door { padding: 8vh 6vw 14vh; }
+  .door-handle { height: 84px; margin-top: -42px; }
+  .door-mono, .door-mono img { width: 84px; height: 84px; } .door-mono { margin-top: -130px; }
+  .door-l .door-mono, .door-r .door-mono { width: 42px; } .door-r .door-mono img { left: -42px; }
+}
+@media (prefers-reduced-motion: reduce) { .entrance { display: none; } }
+
+/* Preview (/?preview): example content is marked as such. */
+.preview-bar { background: #FFF3D6; color: #5A4520; font-size: 13px; text-align: center; padding: 8px 16px; }
+.member-ph { display: grid; place-items: center; aspect-ratio: 1; background: var(--stone-2); color: var(--muted); font-size: 14px; }
+.is-preview .member figcaption::before, .is-preview .story::before { content: 'Exemplo'; justify-self: start; align-self: start; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; background: #FFF3D6; color: #5A4520; padding: 3px 8px; border-radius: 2px; margin-bottom: 4px; }

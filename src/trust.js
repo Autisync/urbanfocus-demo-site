@@ -30,6 +30,30 @@ window.UF_STORIES = [
   // },
 ];
 
+/*
+ * Preview: /?preview fills the three lists with clearly labelled EXAMPLES, so
+ * Luís can see how the sections will look before sending the real ones.
+ * Visitors without ?preview never see them.
+ */
+if (/[?&]preview\b/.test(location.search)) {
+  window.UF_PREVIEW = true;
+  if (!window.UF_STATS.length) window.UF_STATS = [
+    { value: 'XX+', label: 'Imóveis comprados (exemplo)' },
+    { value: 'X', label: 'Anos de experiência (exemplo)' },
+    { value: '24 h', label: 'Para a proposta escrita' },
+  ];
+  if (!window.UF_TEAM.length) window.UF_TEAM = [
+    { name: 'Nome', role: 'Fundador · Aquisições', line: 'Exemplo: a fotografia e a frase de cada pessoa da equipa.' },
+    { name: 'Nome', role: 'Avaliações e obras', line: 'Exemplo: quem visita as casas e prepara a proposta.' },
+    { name: 'Nome', role: 'Processos e escrituras', line: 'Exemplo: quem trata da papelada até à escritura.' },
+  ];
+  if (!window.UF_STORIES.length) window.UF_STORIES = [
+    { situation: 'Herança', place: 'Localidade', quote: 'Exemplo: aqui entra o testemunho real, nas palavras do cliente.', name: 'Nome do cliente', solved: 'O que fizemos: um resumo de como resolvemos o caso.' },
+    { situation: 'Casa com obras', place: 'Localidade', quote: 'Exemplo: o segundo testemunho real. Pode ser texto ou um vídeo vertical.', name: 'Nome do cliente', solved: 'O que fizemos: um resumo de como resolvemos o caso.' },
+    { situation: 'Venda rápida', place: 'Localidade', quote: 'Exemplo: o terceiro testemunho real.', name: 'Nome do cliente', solved: 'O que fizemos: um resumo de como resolvemos o caso.' },
+  ];
+}
+
 (function () {
   'use strict';
   function esc(v) {
@@ -39,6 +63,13 @@ window.UF_STORIES = [
   }
   function ready(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
   ready(function () {
+    if (window.UF_PREVIEW) {
+      document.documentElement.classList.add('is-preview');
+      var bar = document.createElement('div');
+      bar.className = 'preview-bar';
+      bar.textContent = 'Pré-visualização: os números, a equipa e os testemunhos marcados como exemplo são substituídos pelos reais.';
+      document.body.insertBefore(bar, document.body.firstChild);
+    }
     var stats = (window.UF_STATS || []).filter(function (x) { return x && x.value; });
     var st = document.querySelector('[data-stats]');
     if (st && stats.length) {
@@ -49,7 +80,7 @@ window.UF_STORIES = [
     var t = document.querySelector('[data-team]');
     if (t && team.length) {
       t.innerHTML = '<h3>A equipa</h3><div class="team-grid">' + team.map(function (m) {
-        return '<figure class="member">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy">' : '') +
+        return '<figure class="member">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy">' : '<span class="member-ph">Fotografia</span>') +
           '<figcaption><b>' + esc(m.name) + '</b><span>' + esc(m.role || '') + '</span>' + (m.line ? '<p>' + esc(m.line) + '</p>' : '') + '</figcaption></figure>';
       }).join('') + '</div>';
       t.hidden = false;
