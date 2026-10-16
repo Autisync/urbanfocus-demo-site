@@ -44,6 +44,12 @@
       else host.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
+    // A menu built with <details class="nav-menu"> closes when a link in it is used.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('.nav-menu a');
+      if (a) { var d = a.closest('details'); if (d) d.open = false; }
+    });
+
     // ── Next free time ──
     Array.prototype.forEach.call(document.querySelectorAll('[data-next-free]'), function (el) {
       window.AutisyncBooking.nextFree({ api: API, slug: C.bookingSlug, service: el.getAttribute('data-next-free') || '', locale: window.SITE_LOCALE, words: window.BOOKING_COPY })
