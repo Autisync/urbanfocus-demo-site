@@ -84,8 +84,11 @@
         e.preventDefault();
         if (form.website && form.website.value) return; // a bot filled the hidden field
         var data = {};
+        var consent = form.querySelector('input[type="checkbox"][required]');
+        if (consent && !consent.checked) return say('Para enviarmos, aceite a política de privacidade.', 'error');
         Array.prototype.forEach.call(form.elements, function (f) {
           if (!f.name || f.name === 'website' || f.type === 'submit') return;
+          if (f.closest('[hidden]') || (f.value === '' && f.tagName !== 'INPUT')) return; // hidden or empty extras
           if ((f.type === 'radio' || f.type === 'checkbox') && !f.checked) return;
           data[f.name] = f.value.trim();
         });
@@ -138,6 +141,48 @@
       }
       var t = openEl.querySelector('[data-open-text]');
       if (t && text) t.textContent = text;
+    }
+
+    // ── Mobile menu ──
+    var toggle = document.querySelector('[data-nav-toggle]');
+    if (toggle) {
+      var menu = document.getElementById(toggle.getAttribute('aria-controls'));
+      var setMenu = function (open) { toggle.setAttribute('aria-expanded', open); document.body.classList.toggle('menu-open', open); };
+      toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+      menu.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+    }
+
+    // ── Contact form: ?assunto=alerta picks the subject; an alert asks what they want ──
+    var subject = document.querySelector('[data-subject]');
+    if (subject) {
+      var want = new URLSearchParams(location.search).get('assunto');
+      if (want && subject.querySelector('option[value="' + want + '"]')) subject.value = want;
+      var extra = document.querySelector('[data-alert-fields]');
+      var syncSubject = function () { if (extra) extra.hidden = subject.value !== 'alerta'; };
+      subject.addEventListener('change', syncSubject);
+      syncSubject();
+    }
+
+    // ── Mortgage calculator (/comprar) ──
+    var calc = document.querySelector('[data-calc]');
+    if (calc) {
+      var eur = new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+      var num = function (n) { return parseFloat(String(calc.elements[n].value).replace(',', '.')) || 0; };
+      var out = function (k, v) { calc.querySelector('[data-out="' + k + '"]').textContent = v; };
+      var run = function () {
+        var price = num('preco'), down = Math.min(Math.max(num('entrada'), 0), 100) / 100;
+        var years = Math.max(num('anos'), 1), rate = num('taxa') / 100 / 12, n = years * 12;
+        var loan = price * (1 - down);
+        var monthly = rate ? loan * rate / (1 - Math.pow(1 + rate, -n)) : loan / n;
+        out('prestacao', price ? eur.format(monthly) : '–');
+        out('emprestimo', eur.format(loan));
+        out('entrada', eur.format(price * down));
+        out('selo', eur.format(price * 0.008 + loan * 0.006));
+      };
+      calc.addEventListener('input', run);
+      calc.addEventListener('submit', function (e) { e.preventDefault(); });
+      run();
     }
 
     // Year in the footer.

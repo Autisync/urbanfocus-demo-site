@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<!--@head-->
+  <title>Contactos · Urban Focus</title>
+  <meta name="description" content="Fale com a Urban Focus: 965 156 475, WhatsApp ou email. Rua Joaquim Luís Chico, n.º 3, 2600-782 Vila Franca de Xira.">
+  <script>
+    window.SITE_LOCALE = 'pt-PT';
+    window.SITE_TEXT = {
+      needName: 'Indique o seu nome, por favor.',
+      badEmail: 'Esse email não parece estar correto.',
+      sending: 'A enviar…',
+      thanks: 'Obrigado. Respondemos hoje, por email ou telefone.',
+      failed: 'Não foi possível enviar. Tente de novo ou ligue-nos para o 965 156 475.',
+    };
+  </script>
+</head>
+<body data-page="contactos">
+  <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
+<!--@header-->
+
+  <main id="conteudo">
+    <section class="page-head" data-track-section="Contactos">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Caminho"><a href="/">Início</a> / <span>Contactos</span></nav>
+        <h1 class="page-title">Fale connosco</h1>
+        <p class="section-sub">Para vender, comprar ou só tirar uma dúvida. Respondemos no próprio dia.</p>
+      </div>
+    </section>
+
+    <section class="contact" data-track-section="Formulário de contacto">
+      <div class="wrap contact-in">
+        <div class="contact-ways">
+          <a class="way" href="tel:+351965156475"><span class="way-k">Telefone</span><b>965 156 475</b><span class="small">Chamada para a rede móvel nacional</span></a>
+          <a class="way" href="https://wa.me/351965156475" target="_blank" rel="noopener"><span class="way-k">WhatsApp</span><b>Enviar mensagem</b><span class="small">O mais rápido para fotografias e documentos</span></a>
+          <a class="way" href="mailto:urbanfocus.geral@gmail.com"><span class="way-k">Email</span><b>urbanfocus.geral@gmail.com</b></a>
+          <div class="way"><span class="way-k">Morada</span><b>Rua Joaquim Luís Chico, n.º 3</b><span>2600-782 Vila Franca de Xira</span></div>
+          <div class="map">
+            <iframe title="Mapa: Rua Joaquim Luís Chico, Vila Franca de Xira" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Rua+Joaquim+Lu%C3%ADs+Chico+3,+2600-782+Vila+Franca+de+Xira&output=embed"></iframe>
+          </div>
+        </div>
+
+        <div class="card form-card contact-form">
+          <h2>Envie-nos uma mensagem</h2>
+          <form class="lead-form" data-enquiry="Contacto pelo site" data-track-ignore novalidate
+                data-thanks="Obrigado. Respondemos hoje, por email ou telefone.">
+            <label class="field full">
+              <span>Assunto</span>
+              <select name="Assunto" data-subject>
+                <option value="vender">Quero vender um imóvel</option>
+                <option value="comprar">Quero comprar um imóvel</option>
+                <option value="alerta">Avisem-me de novos imóveis</option>
+                <option value="outro">Outro assunto</option>
+              </select>
+            </label>
+            <div class="field full" data-alert-fields hidden>
+              <span>O que procura?</span>
+              <div class="alert-grid">
+                <input name="Zona pretendida" placeholder="Zona (ex.: Alverca, Barreiro)" aria-label="Zona pretendida">
+                <select name="Tipologia pretendida" aria-label="Tipologia pretendida"><option>T0/T1</option><option selected>T2</option><option>T3</option><option>T4 ou mais</option><option>Moradia</option></select>
+                <input name="Orçamento máximo" placeholder="Orçamento máx. (€)" inputmode="numeric" aria-label="Orçamento máximo">
+              </div>
+            </div>
+            <label class="field full">
+              <span>O seu nome</span>
+              <input name="fullName" autocomplete="name" required>
+            </label>
+            <label class="field">
+              <span>Telemóvel</span>
+              <input name="phone" type="tel" autocomplete="tel" inputmode="tel">
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input name="email" type="email" autocomplete="email" required>
+            </label>
+            <label class="field full">
+              <span>Mensagem</span>
+              <textarea name="Mensagem" rows="5"></textarea>
+            </label>
+            <label class="check full">
+              <input type="checkbox" name="Consentimento" value="Aceito" required>
+              <span>Aceito que a Urban Focus use estes dados para me responder, nos termos da <a href="/privacidade">política de privacidade</a>.</span>
+            </label>
+            <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn btn-gold btn-block" type="submit">Enviar mensagem</button>
+            <p class="status" data-status role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!--@footer-->
+  <script src="/site.js"></script>
+</body>
+</html>
