@@ -1,18 +1,9 @@
 <!doctype html>
 <html lang="pt-PT">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Urban Focus · Compramos o seu imóvel em Lisboa e na Margem Sul</title>
-  <meta name="description" content="Compra direta de imóveis no distrito de Lisboa e na Margem Sul. Proposta em 24 horas, sem comissões, no estado em que está: heranças, obras por fazer, inquilinos ou pressa.">
-  <meta name="theme-color" content="#13161A">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="booking.css">
-  <link rel="stylesheet" href="styles.css">
-  <script src="config.js"></script>
+<!--@head-->
+  <title>Urban Focus · Compramos e vendemos imóveis em Lisboa e na Margem Sul</title>
+  <meta name="description" content="Compra direta de imóveis no distrito de Lisboa e na Margem Sul, com proposta em 24 horas e sem comissões. Imóveis remodelados à venda, prontos a habitar.">
   <script>
     window.SITE_LOCALE = 'pt-PT';
     window.SITE_TEXT = {
@@ -22,61 +13,11 @@
       thanks: 'Obrigado. Ligamos-lhe hoje e enviamos a proposta em 24 horas.',
       failed: 'Não foi possível enviar. Tente de novo ou ligue-nos para o 965 156 475.',
     };
-    window.BOOKING_COPY = {
-      steps: ['Marcação', 'Dia e hora', 'Os seus dados', 'Confirmar'],
-      loading: 'A carregar a agenda…',
-      down: 'A agenda não está disponível neste momento. Ligue-nos para o 965 156 475.',
-      free: 'Gratuito', whoWith: 'Com quem?', anyone: 'O primeiro disponível',
-      chooseTime: 'Escolha uma hora', earlier: 'Dias anteriores', later: 'Dias seguintes',
-      closed: 'Fechado', full: 'Cheio', today: 'Hoje', tomorrow: 'Amanhã',
-      freeN: function (n) { return n + (n === 1 ? ' livre' : ' livres'); },
-      pickDay: 'Escolha um dia para ver as horas livres.',
-      noTimes: 'Sem horas livres neste dia. Experimente o seguinte.',
-      zone: 'Hora de Lisboa',
-      cont: 'Continuar', back: 'Voltar',
-      name: 'O seu nome', email: 'Email', phone: 'Telemóvel', optional: 'opcional',
-      notes: 'Morada do imóvel e o que devemos saber', notesPh: 'Ex.: T2 em Alhandra, herança de três irmãos, precisa de obras',
-      review: 'Verificar e confirmar', needName: 'Indique o seu nome, por favor.', needEmail: 'Esse email não parece estar correto.', needPhone: 'Indique um telemóvel para combinarmos a visita.',
-      summary: 'A sua marcação', what: 'O quê', when: 'Quando', with: 'Com', who: 'Nome', mail: 'Email',
-      payOnDay: 'Sem custos', payOnline: '', payBtn: '',
-      confirm: 'Confirmar marcação', sending: 'A marcar…',
-      doneTitle: 'Está marcado.',
-      doneText: function (e) { return 'Enviámos a confirmação para ' + e + ', com um link para alterar ou cancelar. Na véspera recebe um lembrete.'; },
-      another: 'Fazer outra marcação',
-      taken: 'Essa hora acabou de ser ocupada. Escolha outra, por favor.',
-      powered: 'As marcações entram diretamente na nossa agenda',
-      at: 'às', price: 'Preço', bookedOn: 'Marcado em',
-      mins: function (m) { return m % 60 === 0 ? (m / 60) + (m === 60 ? ' hora' : ' horas') : m > 60 ? Math.floor(m / 60) + ' h ' + (m % 60) + ' min' : m + ' min'; },
-    };
-    window.BOOKING_ORDER = function (s) { return ['Avaliação gratuita no local', 'Chamada de 15 minutos', 'Visita ao T2 da Castanheira'].indexOf(s.name) + 1 || 9; };
   </script>
 </head>
-<body>
+<body data-page="inicio">
   <a class="skip" href="#proposta">Saltar para o pedido de proposta</a>
-
-  <div class="topbar">
-    <div class="wrap topbar-in">
-      <p>Proposta de compra em <b>24 horas</b> · Distrito de Lisboa e Margem Sul</p>
-      <a href="tel:+351965156475" class="topbar-tel">965 156 475</a>
-    </div>
-  </div>
-
-  <header class="nav" data-track-section="Cabeçalho">
-    <div class="wrap nav-in">
-      <a class="brand" href="#top" aria-label="Urban Focus, início">
-        <img src="img/monograma.svg" alt="" width="40" height="40">
-        <span class="brand-word">URBANFOCUS</span>
-      </a>
-      <nav class="nav-links" aria-label="Principal">
-        <a href="#como">Como funciona</a>
-        <a href="#situacoes">Situações</a>
-        <a href="#avaliacao">Avaliação</a>
-        <a href="/imoveis">Imóveis à venda</a>
-        <a href="#perguntas">Perguntas</a>
-      </nav>
-      <a class="btn btn-gold nav-cta" href="#proposta">Pedir proposta</a>
-    </div>
-  </header>
+<!--@header-->
 
   <main id="top">
     <!-- Hero: the promise on the left, the form that keeps it on the right. -->
@@ -84,17 +25,17 @@
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="wrap hero-in">
         <div class="hero-copy">
-          <p class="eyebrow">Compra direta de imóveis</p>
+          <p class="eyebrow">Compra direta e venda de imóveis</p>
           <h1>Compramos a sua casa no estado em que está.</h1>
-          <p class="lede">Herança por resolver, obras por fazer, inquilino lá dentro ou simplesmente pressa: fazemos uma proposta em 24 horas e tratamos de tudo até à escritura. Sem comissões e sem visitas sem fim.</p>
+          <p class="lede">Herança por resolver, obras por fazer, inquilino lá dentro ou simplesmente pressa: fazemos uma proposta em 24 horas e tratamos de tudo até à escritura. Depois recuperamos cada casa e voltamos a pô-la à venda.</p>
           <ul class="hero-points">
             <li>Proposta escrita em 24 horas</li>
             <li>Sem comissões nem custos para si</li>
             <li>Escritura na data que lhe convier</li>
           </ul>
           <div class="hero-actions">
+            <a class="btn btn-ghost" href="/imoveis">Ver imóveis à venda</a>
             <a class="btn btn-ghost" href="tel:+351965156475">Ligar 965 156 475</a>
-            <a class="btn btn-ghost" href="https://wa.me/351965156475?text=Ol%C3%A1%2C%20tenho%20um%20im%C3%B3vel%20para%20vender." target="_blank" rel="noopener">WhatsApp</a>
           </div>
         </div>
 
@@ -135,13 +76,12 @@
             <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
             <button class="btn btn-gold btn-block" type="submit">Pedir proposta grátis</button>
             <p class="status" data-status role="status" aria-live="polite"></p>
-            <p class="fine">Os seus dados são usados apenas para lhe responder. Nunca os partilhamos.</p>
+            <p class="fine">Os seus dados são usados apenas para lhe responder. Ver a <a href="/privacidade">política de privacidade</a>.</p>
           </form>
         </div>
       </div>
     </section>
 
-    <!-- The four things a seller worries about, answered once. -->
     <section class="promise" aria-label="O que garantimos">
       <div class="wrap promise-in">
         <div><b>24 h</b><span>da visita à proposta escrita</span></div>
@@ -151,99 +91,71 @@
       </div>
     </section>
 
-    <section class="how" id="como" data-track-section="Como funciona">
-      <div class="wrap">
-        <h2 class="section-title">Como funciona</h2>
-        <ol class="steps">
-          <li>
-            <h3>Fale connosco</h3>
-            <p>Pelo formulário, por telefone ou WhatsApp. Diga-nos onde fica o imóvel e em que situação está. Não precisa de documentos nem de fotografias.</p>
-          </li>
-          <li>
-            <h3>Visita e proposta em 24 horas</h3>
-            <p>Marcamos uma avaliação gratuita no local à hora que lhe der jeito. No dia seguinte recebe a proposta por escrito, com o valor e os prazos.</p>
-          </li>
-          <li>
-            <h3>Escritura e pagamento</h3>
-            <p>Se aceitar, tratamos do CPCV, das certidões e da escritura. Recebe o valor na escritura, na data que escolher. Se não aceitar, não paga nada.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="cases" id="situacoes" data-track-section="Situações">
-      <div class="wrap">
-        <h2 class="section-title">Situações que resolvemos todas as semanas</h2>
-        <div class="case-grid">
-          <article><h3>Heranças e partilhas</h3><p>Vários herdeiros, um imóvel e ninguém quer tratar. Falamos com todos, organizamos a habilitação e compramos com o acordo de cada um.</p></article>
-          <article><h3>Precisa de obras ou está devoluto</h3><p>Humidade, telhado, cozinha dos anos 70 ou fechado há anos. Não precisa de arranjar nada: o estado entra na proposta.</p></article>
-          <article><h3>Divórcio ou separação</h3><p>Uma venda rápida e neutra, com o valor dividido na escritura e sem semanas de visitas pelo meio.</p></article>
-          <article><h3>Imóvel com inquilino</h3><p>Compramos com o contrato em curso. O inquilino fica, e o senhor deixa de ser senhorio.</p></article>
-          <article><h3>Vive fora ou longe</h3><p>Emigrado ou a viver noutra cidade? Tratamos de tudo à distância, com procuração se for preciso.</p></article>
-          <article><h3>Dívidas ou penhora</h3><p>Com discrição total, encontramos a forma de vender antes que a situação se complique.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="book" id="avaliacao" data-track-section="Avaliação">
-      <div class="wrap book-in">
-        <div class="book-copy">
-          <h2 class="section-title">Marque a avaliação gratuita</h2>
-          <p>Escolha o dia e a hora. Um de nós vai ver o imóvel consigo, sem compromisso, e a proposta chega por escrito no dia seguinte.</p>
-          <p class="next" data-next-free="Avaliação gratuita no local" hidden>
-            <span>Próxima hora livre:</span> <b data-nf-day></b> <b data-nf-time></b><span data-nf-if-staff> com <span data-nf-staff></span></span>
-          </p>
-          <p class="small">Prefere falar primeiro? Marque uma <a href="#avaliacao" data-book="Chamada de 15 minutos">chamada de 15 minutos</a>.</p>
-        </div>
-        <div class="book-widget" data-booking></div>
-      </div>
-    </section>
-
-    <!-- What happens to a house after we buy it. The cards are read live from
-         the CRM (listings.js); the one below shows until they load. -->
-    <section class="sale" id="venda" data-track-section="Imóveis à venda" data-homes-preview>
+    <!-- The most viewed homes, each with a quick view. Read live from the CRM
+         (listings.js); the card below shows until they load. -->
+    <section class="sale" id="venda" data-track-section="Mais vistos" data-homes-preview>
       <div class="wrap">
         <div class="sale-head">
           <div>
-            <h2 class="section-title">Depois de comprarmos, recuperamos</h2>
-            <p class="section-sub">Cada imóvel que compramos é remodelado e volta ao mercado. Estes estão à venda agora.</p>
+            <p class="eyebrow">Os mais procurados</p>
+            <h2 class="section-title">Imóveis mais vistos</h2>
+            <p class="section-sub">As casas que mais pessoas estão a ver esta semana. Abra a vista rápida para ver fotografias e detalhes sem sair da página.</p>
           </div>
           <a class="btn btn-line" href="/imoveis" data-homes-more><span>Ver todos os imóveis (<span data-count>1</span>)</span></a>
         </div>
         <div class="home-grid" data-homes-grid hidden></div>
         <div class="home-grid" data-homes-fallback>
-          <a class="home-card" href="#avaliacao" data-book="Visita ao T2 da Castanheira">
-            <div class="home-card-photo"><img src="img/t2_cozinha.jpg" alt=""></div>
+          <article class="home-card">
+            <div class="home-card-photo"><img src="/img/t2_cozinha.jpg" alt=""></div>
             <div class="home-card-body">
-              <p class="home-card-where">Centro, Castanheira do Ribatejo</p>
-              <h3>T2 totalmente remodelado</h3>
-              <p class="home-card-meta">T2 · 61,20 m² · varanda de 19,80 m²</p>
               <p class="home-card-price">219.000 €</p>
+              <h3><a class="home-card-link" href="/imovel/UF-001">T2 totalmente remodelado</a></h3>
+              <p class="home-card-where">Centro, Castanheira do Ribatejo</p>
+              <p class="home-card-specs"><span>T2</span><span>61,20 m²</span><span>Varanda 19,80 m²</span></p>
             </div>
-          </a>
+          </article>
         </div>
+      </div>
+    </section>
+
+    <!-- Two ways in: selling to us, or buying from us. -->
+    <section class="paths" data-track-section="Caminhos">
+      <div class="wrap paths-in">
+        <a class="path path-dark" href="/vender">
+          <p class="eyebrow">Para quem vende</p>
+          <h2>Venda sem obras, sem visitas e sem comissões.</h2>
+          <p>Como funciona a compra direta, as situações que resolvemos todas as semanas e a avaliação gratuita no local.</p>
+          <span class="path-go">Vender o meu imóvel →</span>
+        </a>
+        <a class="path path-light" href="/comprar">
+          <p class="eyebrow">Para quem compra</p>
+          <h2>Uma casa recuperada, pronta a habitar.</h2>
+          <p>Os passos da compra em Portugal, do CPCV à escritura, os impostos a contar e um simulador de prestação.</p>
+          <span class="path-go">Ler o guia do comprador →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="how" id="como" data-track-section="Como funciona">
+      <div class="wrap">
+        <h2 class="section-title">Como funciona a compra direta</h2>
+        <ol class="steps">
+          <li><h3>Fale connosco</h3><p>Pelo formulário, por telefone ou WhatsApp. Diga-nos onde fica o imóvel e em que situação está.</p></li>
+          <li><h3>Visita e proposta em 24 horas</h3><p>Avaliação gratuita no local à hora que lhe der jeito. No dia seguinte recebe a proposta por escrito.</p></li>
+          <li><h3>Escritura e pagamento</h3><p>Tratamos do CPCV, das certidões e da escritura. Recebe o valor na data que escolher.</p></li>
+        </ol>
+        <p class="how-more"><a class="btn btn-line" href="/vender">Saber mais e marcar avaliação</a></p>
       </div>
     </section>
 
     <section class="areas" data-track-section="Zonas">
       <div class="wrap areas-in">
-        <h2 class="section-title">Onde compramos</h2>
+        <h2 class="section-title">Onde trabalhamos</h2>
         <div class="area-cols">
           <div><h3>Distrito de Lisboa</h3><p>Lisboa, Loures, Odivelas, Amadora, Sintra, Cascais, Oeiras, Vila Franca de Xira, Alverca, Alhandra, Castanheira do Ribatejo, Azambuja</p></div>
           <div><h3>Margem Sul</h3><p>Almada, Seixal, Barreiro, Moita, Montijo, Alcochete, Sesimbra, Palmela, Setúbal</p></div>
         </div>
         <p class="small">Apartamentos, moradias, terrenos, lojas e prédios inteiros.</p>
-      </div>
-    </section>
-
-    <section class="faq" id="perguntas" data-track-section="Perguntas">
-      <div class="wrap faq-in">
-        <h2 class="section-title">Perguntas frequentes</h2>
-        <details><summary>Quanto tempo demora, do primeiro contacto à escritura?</summary><p>A proposta chega em 24 horas depois da visita. Com a documentação em ordem, a escritura costuma fazer-se em 3 a 6 semanas. Se precisar de mais tempo para sair, combinamos.</p></details>
-        <details><summary>Como chegam ao valor da proposta?</summary><p>Olhamos para as vendas recentes na zona, para o estado do imóvel e para o custo das obras. Mostramos-lhe os números. Uma compra direta é rápida e sem custos para si; em troca, o valor tem em conta as obras e o risco que assumimos.</p></details>
-        <details><summary>Tenho de fazer obras ou limpar a casa antes?</summary><p>Não. Compramos no estado em que está, com móveis ou sem eles.</p></details>
-        <details><summary>E se a casa for de vários herdeiros?</summary><p>É das situações mais comuns. Falamos com todos os herdeiros, ajudamos com a habilitação de herdeiros e a escritura faz-se quando todos estiverem de acordo.</p></details>
-        <details><summary>Tenho algum custo?</summary><p>Nenhum. Não há comissões, e as despesas da compra (escritura, registos e IMT do comprador) são nossas.</p></details>
       </div>
     </section>
 
@@ -253,39 +165,15 @@
         <p>Diga-nos onde fica o imóvel. Amanhã já sabe quanto vale para nós.</p>
         <div class="final-actions">
           <a class="btn btn-gold" href="#proposta">Pedir proposta grátis</a>
-          <a class="btn btn-ghost" href="tel:+351965156475">965 156 475</a>
+          <a class="btn btn-ghost" href="/contactos">Falar connosco</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer" data-track-section="Rodapé">
-    <div class="wrap footer-in">
-      <div>
-        <img src="img/logotipo.svg" alt="Urban Focus, Excelência que transforma" class="footer-logo" width="150" height="150">
-      </div>
-      <div>
-        <h3>Contactos</h3>
-        <p><a href="tel:+351965156475">965 156 475</a><br><a href="mailto:urbanfocus.geral@gmail.com">urbanfocus.geral@gmail.com</a></p>
-        <p>Rua Joaquim Luís Chico, n.º 3<br>2600-782 Vila Franca de Xira</p>
-      </div>
-      <div>
-        <h3>Atalhos</h3>
-        <p><a href="#proposta">Pedir proposta</a><br><a href="#avaliacao">Marcar avaliação</a><br><a href="/imoveis">Imóveis à venda</a></p>
-      </div>
-    </div>
-    <div class="wrap footer-base">
-      <p>&copy; <span data-year>2026</span> Urban Focus · Marca registada INPI n.º 758420</p>
-      <p class="demo-note">Site de demonstração preparado por <a href="https://www.autisync.com/crm/imobiliarias" target="_blank" rel="noopener">Autisync</a>. Os pedidos e as marcações entram no CRM da Urban Focus.</p>
-    </div>
-  </footer>
-
-  <a class="wa-float" href="https://wa.me/351965156475?text=Ol%C3%A1%2C%20tenho%20um%20im%C3%B3vel%20para%20vender." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.2-.2-.5-.3z"/></svg>
-  </a>
-
-  <script src="booking.js"></script>
-  <script src="site.js"></script>
-  <script src="listings.js"></script>
+<!--@footer-->
+  <script src="/site.js"></script>
+  <script src="/demo-listings.js"></script>
+  <script src="/listings.js"></script>
 </body>
 </html>

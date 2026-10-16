@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<!--@head-->
+  <title>Vender o seu imóvel · Urban Focus</title>
+  <meta name="description" content="Venda o seu imóvel à Urban Focus no estado em que está: proposta em 24 horas, sem comissões, com heranças, obras, inquilinos ou dívidas. Avaliação gratuita no local.">
+  <link rel="stylesheet" href="/booking.css">
+  <script>
+    window.SITE_LOCALE = 'pt-PT';
+    window.SITE_TEXT = {
+      needName: 'Indique o seu nome, por favor.',
+      badEmail: 'Esse email não parece estar correto.',
+      sending: 'A enviar…',
+      thanks: 'Obrigado. Ligamos-lhe hoje e enviamos a proposta em 24 horas.',
+      failed: 'Não foi possível enviar. Tente de novo ou ligue-nos para o 965 156 475.',
+    };
+    window.BOOKING_COPY = {
+      steps: ['Marcação', 'Dia e hora', 'Os seus dados', 'Confirmar'],
+      loading: 'A carregar a agenda…',
+      down: 'A agenda não está disponível neste momento. Ligue-nos para o 965 156 475.',
+      free: 'Gratuito', whoWith: 'Com quem?', anyone: 'O primeiro disponível',
+      chooseTime: 'Escolha uma hora', earlier: 'Dias anteriores', later: 'Dias seguintes',
+      closed: 'Fechado', full: 'Cheio', today: 'Hoje', tomorrow: 'Amanhã',
+      freeN: function (n) { return n + (n === 1 ? ' livre' : ' livres'); },
+      pickDay: 'Escolha um dia para ver as horas livres.',
+      noTimes: 'Sem horas livres neste dia. Experimente o seguinte.',
+      zone: 'Hora de Lisboa',
+      cont: 'Continuar', back: 'Voltar',
+      name: 'O seu nome', email: 'Email', phone: 'Telemóvel', optional: 'opcional',
+      notes: 'Morada do imóvel e o que devemos saber', notesPh: 'Ex.: T2 em Alhandra, herança de três irmãos, precisa de obras',
+      review: 'Verificar e confirmar', needName: 'Indique o seu nome, por favor.', needEmail: 'Esse email não parece estar correto.', needPhone: 'Indique um telemóvel para combinarmos a visita.',
+      summary: 'A sua marcação', what: 'O quê', when: 'Quando', with: 'Com', who: 'Nome', mail: 'Email',
+      payOnDay: 'Sem custos', payOnline: '', payBtn: '',
+      confirm: 'Confirmar marcação', sending: 'A marcar…',
+      doneTitle: 'Está marcado.',
+      doneText: function (e) { return 'Enviámos a confirmação para ' + e + ', com um link para alterar ou cancelar. Na véspera recebe um lembrete.'; },
+      another: 'Fazer outra marcação',
+      taken: 'Essa hora acabou de ser ocupada. Escolha outra, por favor.',
+      powered: 'As marcações entram diretamente na nossa agenda',
+      at: 'às', price: 'Preço', bookedOn: 'Marcado em',
+      mins: function (m) { return m % 60 === 0 ? (m / 60) + (m === 60 ? ' hora' : ' horas') : m > 60 ? Math.floor(m / 60) + ' h ' + (m % 60) + ' min' : m + ' min'; },
+    };
+    window.BOOKING_ORDER = function (s) { return ['Avaliação gratuita no local', 'Chamada de 15 minutos', 'Visita ao T2 da Castanheira'].indexOf(s.name) + 1 || 9; };
+  </script>
+</head>
+<body data-page="vender">
+  <a class="skip" href="#proposta">Saltar para o pedido de proposta</a>
+<!--@header-->
+
+  <main id="conteudo">
+    <section class="hero hero-sm" data-track-section="Hero vender">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-in">
+        <div class="hero-copy">
+          <nav class="crumbs crumbs-light" aria-label="Caminho"><a href="/">Início</a> / <span>Vender</span></nav>
+          <p class="eyebrow">Para quem vende</p>
+          <h1>Venda o seu imóvel sem obras, sem visitas e sem comissões.</h1>
+          <p class="lede">Compramos diretamente, com dinheiro próprio, no distrito de Lisboa e na Margem Sul. Recebe uma proposta escrita em 24 horas e escolhe a data da escritura.</p>
+          <div class="hero-actions">
+            <a class="btn btn-ghost" href="#avaliacao">Marcar avaliação gratuita</a>
+            <a class="btn btn-ghost" href="https://wa.me/351965156475?text=Ol%C3%A1%2C%20tenho%20um%20im%C3%B3vel%20para%20vender." target="_blank" rel="noopener">WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="card form-card" id="proposta">
+          <h2>Peça a sua proposta</h2>
+          <p class="small">Gratuito e sem compromisso. Respondemos hoje.</p>
+          <form class="lead-form" data-enquiry="Pedido de proposta" data-track-ignore novalidate
+                data-thanks="Obrigado. Ligamos-lhe hoje e enviamos a proposta em 24 horas.">
+            <label class="field full">
+              <span>Onde fica o imóvel?</span>
+              <input name="Localização" placeholder="Ex.: Alhandra, Barreiro, Lisboa (Benfica)" autocomplete="off" required>
+            </label>
+            <label class="field">
+              <span>Tipo</span>
+              <select name="Tipo de imóvel">
+                <option>Apartamento</option><option>Moradia</option><option>Terreno</option><option>Loja ou armazém</option><option>Prédio</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Situação</span>
+              <select name="Situação">
+                <option>Preciso de vender rápido</option><option>Herança ou partilhas</option><option>Precisa de obras</option>
+                <option>Tem inquilino</option><option>Divórcio ou separação</option><option>Vivo fora / emigrado</option><option>Dívidas ou penhora</option><option>Outra</option>
+              </select>
+            </label>
+            <label class="field full">
+              <span>O seu nome</span>
+              <input name="fullName" autocomplete="name" required>
+            </label>
+            <label class="field">
+              <span>Telemóvel</span>
+              <input name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input name="email" type="email" autocomplete="email" required>
+            </label>
+            <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn btn-gold btn-block" type="submit">Pedir proposta grátis</button>
+            <p class="status" data-status role="status" aria-live="polite"></p>
+            <p class="fine">Os seus dados são usados apenas para lhe responder. Ver a <a href="/privacidade">política de privacidade</a>.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="promise" aria-label="O que garantimos">
+      <div class="wrap promise-in">
+        <div><b>24 h</b><span>da visita à proposta escrita</span></div>
+        <div><b>0 €</b><span>de comissões, obras ou certificados</span></div>
+        <div><b>A sua data</b><span>para a escritura e o pagamento</span></div>
+        <div><b>Papelada</b><span>heranças, partilhas e licenças tratadas por nós</span></div>
+      </div>
+    </section>
+
+    <section class="how" id="como" data-track-section="Como funciona">
+      <div class="wrap">
+        <h2 class="section-title">Como funciona</h2>
+        <ol class="steps">
+          <li>
+            <h3>Fale connosco</h3>
+            <p>Pelo formulário, por telefone ou WhatsApp. Diga-nos onde fica o imóvel e em que situação está. Não precisa de documentos nem de fotografias.</p>
+          </li>
+          <li>
+            <h3>Visita e proposta em 24 horas</h3>
+            <p>Marcamos uma avaliação gratuita no local à hora que lhe der jeito. No dia seguinte recebe a proposta por escrito, com o valor e os prazos.</p>
+          </li>
+          <li>
+            <h3>Escritura e pagamento</h3>
+            <p>Se aceitar, tratamos do CPCV, das certidões e da escritura. Recebe o valor na escritura, na data que escolher. Se não aceitar, não paga nada.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="compare" data-track-section="Comparação">
+      <div class="wrap">
+        <h2 class="section-title">Compra direta ou venda tradicional?</h2>
+        <p class="section-sub">As duas fazem sentido, para pessoas diferentes. Esta é a diferença, sem rodeios.</p>
+        <div class="table-scroll">
+          <table class="compare-table">
+            <thead><tr><th scope="col"></th><th scope="col">Urban Focus</th><th scope="col">Venda com agência</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Tempo até à proposta</th><td>24 horas após a visita</td><td>Semanas ou meses</td></tr>
+              <tr><th scope="row">Comissão</th><td>Nenhuma</td><td>Habitualmente 4 a 6 % + IVA</td></tr>
+              <tr><th scope="row">Obras e limpezas</th><td>Não são precisas</td><td>Muitas vezes recomendadas</td></tr>
+              <tr><th scope="row">Visitas de estranhos</th><td>Uma visita, a nossa</td><td>As que forem precisas</td></tr>
+              <tr><th scope="row">Certidões e licenças</th><td>Tratadas por nós</td><td>Por conta do vendedor</td></tr>
+              <tr><th scope="row">Valor</th><td>Tem em conta obras e risco</td><td>Valor de mercado, se aparecer comprador</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="cases" id="situacoes" data-track-section="Situações">
+      <div class="wrap">
+        <h2 class="section-title">Situações que resolvemos todas as semanas</h2>
+        <div class="case-grid">
+          <article><h3>Heranças e partilhas</h3><p>Vários herdeiros, um imóvel e ninguém quer tratar. Falamos com todos, organizamos a habilitação e compramos com o acordo de cada um.</p></article>
+          <article><h3>Precisa de obras ou está devoluto</h3><p>Humidade, telhado, cozinha dos anos 70 ou fechado há anos. Não precisa de arranjar nada: o estado entra na proposta.</p></article>
+          <article><h3>Divórcio ou separação</h3><p>Uma venda rápida e neutra, com o valor dividido na escritura e sem semanas de visitas pelo meio.</p></article>
+          <article><h3>Imóvel com inquilino</h3><p>Compramos com o contrato em curso. O inquilino fica, e o senhor deixa de ser senhorio.</p></article>
+          <article><h3>Vive fora ou longe</h3><p>Emigrado ou a viver noutra cidade? Tratamos de tudo à distância, com procuração se for preciso.</p></article>
+          <article><h3>Dívidas ou penhora</h3><p>Com discrição total, encontramos a forma de vender antes que a situação se complique.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="book" id="avaliacao" data-track-section="Avaliação">
+      <div class="wrap book-in">
+        <div class="book-copy">
+          <h2 class="section-title">Marque a avaliação gratuita</h2>
+          <p>Escolha o dia e a hora. Um de nós vai ver o imóvel consigo, sem compromisso, e a proposta chega por escrito no dia seguinte.</p>
+          <p class="next" data-next-free="Avaliação gratuita no local" hidden>
+            <span>Próxima hora livre:</span> <b data-nf-day></b> <b data-nf-time></b><span data-nf-if-staff> com <span data-nf-staff></span></span>
+          </p>
+          <p class="small">Prefere falar primeiro? Marque uma <a href="#avaliacao" data-book="Chamada de 15 minutos">chamada de 15 minutos</a>.</p>
+        </div>
+        <div class="book-widget" data-booking></div>
+      </div>
+    </section>
+
+    <section class="faq" id="perguntas" data-track-section="Perguntas">
+      <div class="wrap faq-in">
+        <h2 class="section-title">Perguntas frequentes</h2>
+        <details><summary>Quanto tempo demora, do primeiro contacto à escritura?</summary><p>A proposta chega em 24 horas depois da visita. Com a documentação em ordem, a escritura costuma fazer-se em 3 a 6 semanas. Se precisar de mais tempo para sair, combinamos.</p></details>
+        <details><summary>Como chegam ao valor da proposta?</summary><p>Olhamos para as vendas recentes na zona, para o estado do imóvel e para o custo das obras. Mostramos-lhe os números. Uma compra direta é rápida e sem custos para si; em troca, o valor tem em conta as obras e o risco que assumimos.</p></details>
+        <details><summary>Tenho de fazer obras ou limpar a casa antes?</summary><p>Não. Compramos no estado em que está, com móveis ou sem eles.</p></details>
+        <details><summary>E se a casa for de vários herdeiros?</summary><p>É das situações mais comuns. Falamos com todos os herdeiros, ajudamos com a habilitação de herdeiros e a escritura faz-se quando todos estiverem de acordo.</p></details>
+        <details><summary>Que documentos vou precisar?</summary><p>Para começar, nenhum. Para a escritura são precisos a caderneta predial, a certidão permanente do registo predial, a licença de utilização e o certificado energético. Pedimos e pagamos os que faltarem.</p></details>
+        <details><summary>Tenho algum custo?</summary><p>Nenhum. Não há comissões, e as despesas da compra (escritura, registos e IMT do comprador) são nossas. As mais-valias, se existirem, são declaradas por si no IRS do ano da venda.</p></details>
+      </div>
+    </section>
+
+    <section class="final" data-track-section="Contacto final">
+      <div class="wrap final-in">
+        <h2>Uma proposta não custa nada.</h2>
+        <p>Diga-nos onde fica o imóvel. Amanhã já sabe quanto vale para nós.</p>
+        <div class="final-actions">
+          <a class="btn btn-gold" href="#proposta">Pedir proposta grátis</a>
+          <a class="btn btn-ghost" href="tel:+351965156475">965 156 475</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<!--@footer-->
+  <script src="/booking.js"></script>
+  <script src="/site.js"></script>
+</body>
+</html>
