@@ -110,6 +110,5 @@
   .bk-ghost, .bk-skel { animation: none; }
 }
 
-/* "with Dan" only once the diary has answered. */
-[data-next-free]:not([data-state="ready"]) [data-nf-if-staff] { display: none; }
-[hidden] { display: none !important; }
+.bk-picked { margin: 0; padding: 12px 14px; background: var(--bk-soft); border-left: 3px solid var(--bk-accent); border-radius: var(--bk-radius-sm, 10px); font-size: 14px; line-height: 1.45; }
+.bk-link { background: none; border: 0; padding: 0; margin-left: 6px; color: var(--bk-accent); text-decoration: underline; font-size: 13px; }

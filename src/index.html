@@ -33,7 +33,7 @@
       pickDay: 'Escolha um dia para ver as horas livres.',
       noTimes: 'Sem horas livres neste dia. Experimente o seguinte.',
       zone: 'Hora de Lisboa',
-      cont: 'Continuar', back: 'Voltar',
+      cont: 'Continuar', back: 'Voltar', change: 'Alterar',
       name: 'O seu nome', email: 'Email', phone: 'Telemóvel', optional: 'opcional',
       notes: 'Morada do imóvel e o que devemos saber', notesPh: 'Ex.: T2 em Alhandra, herança de três irmãos, precisa de obras',
       review: 'Verificar e confirmar', needName: 'Indique o seu nome, por favor.', needEmail: 'Esse email não parece estar correto.', needPhone: 'Indique um telemóvel para combinarmos a visita.',
@@ -48,7 +48,9 @@
       at: 'às', price: 'Preço', bookedOn: 'Marcado em',
       mins: function (m) { return m % 60 === 0 ? (m / 60) + (m === 60 ? ' hora' : ' horas') : m > 60 ? Math.floor(m / 60) + ' h ' + (m % 60) + ' min' : m + ' min'; },
     };
-    window.BOOKING_ORDER = function (s) { return ['Avaliação gratuita no local', 'Chamada de 15 minutos', 'Visita ao T2 da Castanheira'].indexOf(s.name) + 1 || 9; };
+    window.BOOKING_ORDER = function (s) { return ['Avaliação gratuita no local', 'Chamada de 15 minutos'].indexOf(s.name) + 1 || 9; };
+    // The home page is for sellers: viewings of homes for sale are booked on each home's own page.
+    window.BOOKING_ONLY = function (s) { return !/^visita/i.test(s.name); };
   </script>
 </head>
 <body>
@@ -69,10 +71,11 @@
       </a>
       <nav class="nav-links" aria-label="Principal">
         <a href="#como">Como funciona</a>
-        <a href="#situacoes">Situações</a>
+        <a href="#comparar">Porquê nós</a>
+        <a href="#quem-somos">Quem somos</a>
         <a href="#avaliacao">Avaliação</a>
-        <a href="/imoveis">Imóveis à venda</a>
         <a href="#perguntas">Perguntas</a>
+        <a href="/imoveis" class="nav-buy">Comprar imóveis remodelados</a>
       </nav>
       <a class="btn btn-gold nav-cta" href="#proposta">Pedir proposta</a>
     </div>
@@ -92,6 +95,10 @@
             <li>Sem comissões nem custos para si</li>
             <li>Escritura na data que lhe convier</li>
           </ul>
+          <p class="hero-next" data-next-free="Avaliação gratuita no local" hidden>
+            <span>Próxima avaliação livre: <b data-nf-day></b> às <b data-nf-time></b><span data-nf-if-staff> com <span data-nf-staff></span></span></span>
+            <button type="button" class="btn btn-gold btn-sm" data-nf-take hidden>Marcar esta hora</button>
+          </p>
           <div class="hero-actions">
             <a class="btn btn-ghost" href="tel:+351965156475">Ligar 965 156 475</a>
             <a class="btn btn-ghost" href="https://wa.me/351965156475?text=Ol%C3%A1%2C%20tenho%20um%20im%C3%B3vel%20para%20vender." target="_blank" rel="noopener">WhatsApp</a>
@@ -151,6 +158,52 @@
       </div>
     </section>
 
+
+    <!-- Luís's comparison: a traditional sale against selling to Urban Focus. The
+         bars are drawn to scale (24 hours against about 6 months). -->
+    <section class="compare" id="comparar" data-track-section="Comparação">
+      <div class="wrap">
+        <h2 class="section-title">Vender com uma imobiliária ou vender à Urban Focus</h2>
+        <p class="section-sub">As duas formas de vender, lado a lado.</p>
+        <figure class="time-chart" aria-labelledby="tc-cap">
+          <figcaption id="tc-cap">Quanto tempo até ter uma resposta firme</figcaption>
+          <div class="tc-row">
+            <span class="tc-label">Imobiliária tradicional</span>
+            <span class="tc-track"><span class="tc-bar tc-slow" style="width:100%"></span></span>
+            <span class="tc-val">cerca de 6 meses</span>
+          </div>
+          <div class="tc-row">
+            <span class="tc-label">Urban Focus</span>
+            <span class="tc-track"><span class="tc-bar tc-fast" style="width:.56%"></span></span>
+            <span class="tc-val">24 horas</span>
+          </div>
+        </figure>
+        <div class="vs">
+          <div class="vs-col vs-them">
+            <h3>Imobiliária tradicional</h3>
+            <ul>
+              <li><b>Cerca de 6 meses</b> à espera de um comprador</li>
+              <li><b>Comissão</b> de 5% + IVA sobre o preço de venda</li>
+              <li><b>Dezenas de visitas</b> de desconhecidos em sua casa</li>
+              <li><b>Obras e certificados</b> por sua conta antes de vender</li>
+              <li>O negócio cai se o crédito do comprador não for aprovado</li>
+            </ul>
+          </div>
+          <div class="vs-col vs-us">
+            <h3>Urban Focus</h3>
+            <ul>
+              <li><b>Resposta em 24 horas</b>, com a proposta por escrito</li>
+              <li><b>Dinheiro na mão</b> na escritura, sem depender de bancos</li>
+              <li><b>0 € de comissões</b> e as despesas da compra são nossas</li>
+              <li><b>Uma só visita</b>: a nossa, à hora que escolher</li>
+              <li><b>Sem chatices</b>: compramos como está e tratamos da papelada</li>
+            </ul>
+            <a class="btn btn-gold" href="#proposta">Pedir proposta grátis</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="how" id="como" data-track-section="Como funciona">
       <div class="wrap">
         <h2 class="section-title">Como funciona</h2>
@@ -185,43 +238,51 @@
       </div>
     </section>
 
+    <!-- Trust: who is behind it. The team and the stories come from
+         window.UF_TEAM / window.UF_STORIES (trust.js); empty, they stay hidden. -->
+    <section class="about" id="quem-somos" data-track-section="Quem somos">
+      <div class="wrap about-in">
+        <div class="about-copy">
+          <h2 class="section-title">Quem somos</h2>
+          <p>A Urban Focus é uma empresa de Vila Franca de Xira que compra imóveis diretamente aos proprietários, no distrito de Lisboa e na Margem Sul. Não somos intermediários: quem visita a sua casa e faz a proposta é quem a compra.</p>
+          <p>Depois da compra, recuperamos cada imóvel e devolvemo-lo ao mercado. É por isso que podemos comprar casas que precisam de obras, com inquilino ou com a papelada por resolver.</p>
+          <ul class="values">
+            <li><b>Transparência</b><span>Mostramos como chegamos ao valor, com os números à vista.</span></li>
+            <li><b>Rapidez</b><span>Proposta escrita em 24 horas e escritura na data que lhe convier.</span></li>
+            <li><b>Proximidade</b><span>Uma equipa local, com escritório em Vila Franca de Xira.</span></li>
+          </ul>
+        </div>
+        <aside class="about-facts">
+          <dl>
+            <div><dt>Escritório</dt><dd>Rua Joaquim Luís Chico, n.º 3<br>2600-782 Vila Franca de Xira</dd></div>
+            <div><dt>Marca registada</dt><dd>INPI n.º 758420</dd></div>
+            <div><dt>Telefone</dt><dd><a href="tel:+351965156475">965 156 475</a></dd></div>
+          </dl>
+        </aside>
+        <div class="team" data-team hidden></div>
+      </div>
+    </section>
+
+    <section class="stories" id="testemunhos" data-track-section="Testemunhos" data-stories hidden>
+      <div class="wrap">
+        <h2 class="section-title">Casos reais</h2>
+        <p class="section-sub">Pessoas a quem comprámos a casa, nas palavras delas.</p>
+        <div class="story-grid" data-story-grid></div>
+      </div>
+    </section>
+
     <section class="book" id="avaliacao" data-track-section="Avaliação">
       <div class="wrap book-in">
         <div class="book-copy">
           <h2 class="section-title">Marque a avaliação gratuita</h2>
           <p>Escolha o dia e a hora. Um de nós vai ver o imóvel consigo, sem compromisso, e a proposta chega por escrito no dia seguinte.</p>
           <p class="next" data-next-free="Avaliação gratuita no local" hidden>
-            <span>Próxima hora livre:</span> <b data-nf-day></b> <b data-nf-time></b><span data-nf-if-staff> com <span data-nf-staff></span></span>
+            <span>Próxima hora livre: <b data-nf-day></b> às <b data-nf-time></b><span data-nf-if-staff> com <span data-nf-staff></span></span></span>
+            <button type="button" class="btn btn-dark btn-sm" data-nf-take hidden>Marcar esta hora</button>
           </p>
           <p class="small">Prefere falar primeiro? Marque uma <a href="#avaliacao" data-book="Chamada de 15 minutos">chamada de 15 minutos</a>.</p>
         </div>
         <div class="book-widget" data-booking></div>
-      </div>
-    </section>
-
-    <!-- What happens to a house after we buy it. The cards are read live from
-         the CRM (listings.js); the one below shows until they load. -->
-    <section class="sale" id="venda" data-track-section="Imóveis à venda" data-homes-preview>
-      <div class="wrap">
-        <div class="sale-head">
-          <div>
-            <h2 class="section-title">Depois de comprarmos, recuperamos</h2>
-            <p class="section-sub">Cada imóvel que compramos é remodelado e volta ao mercado. Estes estão à venda agora.</p>
-          </div>
-          <a class="btn btn-line" href="/imoveis" data-homes-more><span>Ver todos os imóveis (<span data-count>1</span>)</span></a>
-        </div>
-        <div class="home-grid" data-homes-grid hidden></div>
-        <div class="home-grid" data-homes-fallback>
-          <a class="home-card" href="#avaliacao" data-book="Visita ao T2 da Castanheira">
-            <div class="home-card-photo"><img src="img/t2_cozinha.jpg" alt=""></div>
-            <div class="home-card-body">
-              <p class="home-card-where">Centro, Castanheira do Ribatejo</p>
-              <h3>T2 totalmente remodelado</h3>
-              <p class="home-card-meta">T2 · 61,20 m² · varanda de 19,80 m²</p>
-              <p class="home-card-price">219.000 €</p>
-            </div>
-          </a>
-        </div>
       </div>
     </section>
 
@@ -271,11 +332,18 @@
       </div>
       <div>
         <h3>Atalhos</h3>
-        <p><a href="#proposta">Pedir proposta</a><br><a href="#avaliacao">Marcar avaliação</a><br><a href="/imoveis">Imóveis à venda</a></p>
+        <p><a href="#proposta">Pedir proposta</a><br><a href="#avaliacao">Marcar avaliação</a><br><a href="/imoveis">Comprar imóveis remodelados</a></p>
+        <p class="social">
+          <a href="https://www.facebook.com/p/Urban-Focus-Compra-e-venda-de-im%C3%B3veis-61588997901731/" target="_blank" rel="noopener" aria-label="Urban Focus no Facebook">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21h2.9z"/></svg>
+            Facebook
+          </a>
+        </p>
       </div>
     </div>
     <div class="wrap footer-base">
       <p>&copy; <span data-year>2026</span> Urban Focus · Marca registada INPI n.º 758420</p>
+      <p class="legal"><a href="/termos">Termos e condições</a> · <a href="/privacidade">Política de privacidade</a> · <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener">Livro de Reclamações</a></p>
       <p class="demo-note">Site de demonstração preparado por <a href="https://www.autisync.com/crm/imobiliarias" target="_blank" rel="noopener">Autisync</a>. Os pedidos e as marcações entram no CRM da Urban Focus.</p>
     </div>
   </footer>
@@ -286,6 +354,6 @@
 
   <script src="booking.js"></script>
   <script src="site.js"></script>
-  <script src="listings.js"></script>
+  <script src="trust.js"></script>
 </body>
 </html>

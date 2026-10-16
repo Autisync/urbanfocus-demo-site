@@ -32,7 +32,7 @@
     // ── Booking ──
     var host = document.querySelector('[data-booking]');
     if (host && window.AutisyncBooking) {
-      window.AutisyncBooking.mount(host, { api: API, app: APP, slug: C.bookingSlug, copy: window.BOOKING_COPY || {}, order: window.BOOKING_ORDER, locale: window.SITE_LOCALE });
+      window.AutisyncBooking.mount(host, { api: API, app: APP, slug: C.bookingSlug, copy: window.BOOKING_COPY || {}, order: window.BOOKING_ORDER, only: window.BOOKING_ONLY, locale: window.SITE_LOCALE });
     }
     document.addEventListener('click', function (e) {
       var b = e.target.closest('[data-book]');
@@ -57,6 +57,12 @@
           if (!n.staff) Array.prototype.forEach.call(el.querySelectorAll('[data-nf-if-staff]'), function (x) { x.hidden = true; });
           el.hidden = false; // a site may keep it hidden until there is a time to show
           el.setAttribute('data-state', 'ready');
+          // A [data-nf-take] button books exactly this time: the widget opens on
+          // "your details", like a Calendly link, with nothing else to choose.
+          Array.prototype.forEach.call(el.querySelectorAll('[data-nf-take]'), function (b) {
+            b.hidden = false;
+            b.onclick = function (e) { e.preventDefault(); window.AutisyncBooking.take(n); track('click', 'Next free: book'); };
+          });
         })
         .catch(function () { el.hidden = true; });
     });

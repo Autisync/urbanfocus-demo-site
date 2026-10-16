@@ -3,6 +3,7 @@
  *
  *   AutisyncBooking.mount(element, { api, slug, app, copy })
  *   AutisyncBooking.choose('HydraFacial')       open the widget on a service
+ *   AutisyncBooking.take(next)                  book the time nextFree() found
  *   AutisyncBooking.nextFree({ api, slug })     the first free time (for a hero)
  *
  * Talks to the CRM's public booking API (GET .../availability, POST .../book),
@@ -353,8 +354,11 @@
     }
 
     function stepDetails() {
-      var f = state.form;
-      return '<form class="bk-form" novalidate data-track-ignore>' +
+      var f = state.form, s = state.slot;
+      // What they are booking, so a time picked from "Next free" is never a surprise.
+      var picked = s && state.service ? '<p class="bk-picked"><b>' + esc(state.service.name) + '</b><br>' + esc(fmtWhen(s)) +
+        (s.staff ? ' · ' + esc(s.staff.name) : '') + ' <button type="button" class="bk-link" data-go="2">' + esc(t.change || 'Change') + '</button></p>' : '';
+      return picked + '<form class="bk-form" novalidate data-track-ignore>' +
         '<div class="bk-two">' +
         '<label>' + esc(t.name) + '<input name="name" autocomplete="name" required value="' + esc(f.name) + '"></label>' +
         '<label>' + esc(t.phone) + '<input name="phone" type="tel" autocomplete="tel" required value="' + esc(f.phone) + '"></label></div>' +
@@ -451,9 +455,11 @@
       // Free things (consultations, quotes) last unless they're all free; the
       // business's own order otherwise.
       if (opts.order) svcs.sort(function (x, y) { return opts.order(x) - opts.order(y); });
+      if (opts.only) svcs = svcs.filter(opts.only); // a page may offer just some of them
       a.services = svcs;
       state.base = a;
-      if (state.pending) { var want = state.pending; state.pending = null; selectByName(want); }
+      if (state.pendingSlot) { var f = state.pendingSlot; state.pendingSlot = null; takeSlot(f); }
+      else if (state.pending) { var want = state.pending; state.pending = null; selectByName(want); }
       else if (svcs.length === 1) state.service = svcs[0];
       render();
     }).catch(function () { set({ failed: true }); });
@@ -465,9 +471,20 @@
       if (s) { state.service = s; state.who = ''; state.day = null; state.slot = null; state.offset = 0; state.step = 2; state.done = null; loadWeek(); pickFirst(); }
     }
 
+    /** Straight to "your details" with a time already picked (the hero's "Next free"). */
+    function takeSlot(found) {
+      var s = (state.base.services || []).filter(function (x) { return x.id === found.service.id; })[0];
+      if (!s) return selectByName(found.service.name);
+      state.service = s; state.who = found.slot.staff ? found.slot.staff.id : ''; state.offset = Math.floor(found.offset / 7);
+      state.day = found.day; state.slot = found.slot; state.step = 3; state.done = null; state.err = null;
+    }
     instance = {
       choose: function (name) {
         if (!state.base) state.pending = name; else { selectByName(name); render(); }
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      },
+      take: function (found) {
+        if (!state.base) state.pendingSlot = found; else { takeSlot(found); render(); }
         el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       },
     };
@@ -501,12 +518,14 @@
     var time = clock(tz, ms);
     var words = found.words || {};
     var day = found.offset === 0 ? (words.today || 'Today') : found.offset === 1 ? (words.tomorrow || 'Tomorrow') : new Intl.DateTimeFormat(LOCALE, { timeZone: tz, weekday: 'long' }).format(ms);
-    return { day: day, time: time, staff: found.slot.staff ? found.slot.staff.name : null, service: found.service.name };
+    return { day: day, time: time, staff: found.slot.staff ? found.slot.staff.name : null, service: found.service.name, found: found };
   }
 
   window.AutisyncBooking = {
     mount: mount,
     choose: function (name) { if (instance) instance.choose(name); },
+    /** Book the time nextFree() found: opens the widget on "your details". */
+    take: function (next) { if (instance && next && next.found) instance.take(next.found); },
     nextFree: function (opts) { return nextFree(opts).then(function (f) { if (f) f.words = opts.words; return describe(f); }); },
   };
 })();
