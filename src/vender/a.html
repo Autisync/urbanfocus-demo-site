@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Urban Focus · Venda a sua casa sem obras nem comissões</title>
+  <meta name="description" content="Compra direta de casas no distrito de Lisboa e na Margem Sul. Proposta escrita em 24 horas, sem comissões, no estado em que está.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="/vender">
+  <meta name="theme-color" content="#13161A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/vender/funil.css">
+  <script src="/config.js"></script>
+</head>
+<body data-variant="a">
+  <a class="skip" href="#pedido">Saltar para o pedido</a>
+  <header class="top" data-track-section="Cabeçalho">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="Urban Focus, página inicial">
+        <img src="/img/monograma-claro.svg" alt="" width="34" height="34">
+        <span class="brand-word">URBANFOCUS</span>
+      </a>
+      <a class="tel" href="tel:+351965156475" data-track="Vender A · ligar">965 156 475<small>Chamada para rede móvel nacional</small></a>
+    </div>
+  </header>
+  <main id="conteudo">
+  <section class="hero" style="--bg:url('/img/hero-ponte.jpg')" data-track-section="Topo">
+    <div class="wrap">
+      <div>
+        <p class="kicker">Compra direta · Distrito de Lisboa e Margem Sul</p>
+        <h1>Venda a sua casa sem obras, sem comissões e sem meses de espera</h1>
+        <p class="lede">A Urban Focus compra a casa diretamente, no estado em que está. Uma visita, uma proposta escrita em 24 horas e a escritura na data que escolher.</p>
+        <ul class="ticks">
+          <li>Proposta escrita em 24 horas</li>
+          <li>Sem comissões e sem obras</li>
+          <li>Heranças, inquilinos, papéis por tratar: tratamos consigo</li>
+        </ul>
+        <p class="note">Sem compromisso: só vende se a proposta lhe fizer sentido.</p>
+      </div>
+      <div class="card" id="pedido">
+      <form id="f" novalidate data-variant="a" data-track-ignore data-send="Pedir proposta" aria-describedby="fine">
+        <h2>Peça a sua proposta</h2>
+        <p class="sub">Quatro perguntas rápidas. Leva menos de um minuto.</p>
+        <div class="progress" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+        <div class="stepcount" id="count" aria-live="polite">Passo 1 de 4</div>
+
+        <fieldset class="step" data-step="1" data-need="zona">
+          <legend>Onde fica a casa?</legend>
+          <label class="f" for="zona">Concelho ou zona</label>
+          <select class="t" id="zona" name="zona" required>
+            <option value="">Escolha…</option>
+            <option>Vila Franca de Xira</option>
+            <option>Alverca do Ribatejo</option>
+            <option>Póvoa de Santa Iria</option>
+            <option>Vialonga / Forte da Casa</option>
+            <option>Alhandra / Castanheira</option>
+            <option>Loures / Odivelas</option>
+            <option>Lisboa</option>
+            <option>Amadora / Sintra</option>
+            <option>Almada / Seixal</option>
+            <option>Barreiro / Moita / Montijo</option>
+            <option>Setúbal</option>
+            <option>Outra zona</option>
+          </select>
+          <label class="f" for="cp">Código postal <small>(opcional)</small></label>
+          <input class="t" id="cp" name="codigo_postal" inputmode="numeric" autocomplete="postal-code" placeholder="2600-000" maxlength="8">
+          <div class="err" role="alert"></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="2" data-need="tipologia" data-auto hidden>
+          <legend>Que casa é?</legend>
+          <div class="opts three" role="radiogroup" aria-label="Tipologia">
+            <label class="opt"><input type="radio" name="tipologia" value="T0/T1"><span>T0 / T1</span></label>
+            <label class="opt"><input type="radio" name="tipologia" value="T2"><span>T2</span></label>
+            <label class="opt"><input type="radio" name="tipologia" value="T3"><span>T3</span></label>
+            <label class="opt"><input type="radio" name="tipologia" value="T4+"><span>T4 ou mais</span></label>
+            <label class="opt"><input type="radio" name="tipologia" value="Moradia"><span>Moradia</span></label>
+            <label class="opt"><input type="radio" name="tipologia" value="Terreno / outro"><span>Terreno / outro</span></label>
+          </div>
+          <div class="err" role="alert"></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="3" data-need="estado prazo" hidden>
+          <legend>Como está e quando quer vender?</legend>
+          <div class="q" id="qe">Estado da casa</div>
+          <div class="opts three" role="radiogroup" aria-labelledby="qe">
+            <label class="opt"><input type="radio" name="estado" value="Bom estado"><span>Bom estado</span></label>
+            <label class="opt"><input type="radio" name="estado" value="Precisa de obras"><span>Precisa de obras</span></label>
+            <label class="opt"><input type="radio" name="estado" value="Para recuperar"><span>Para recuperar</span></label>
+          </div>
+          <div class="q" id="qp">Quando quer vender?</div>
+          <div class="opts" role="radiogroup" aria-labelledby="qp">
+            <label class="opt"><input type="radio" name="prazo" value="O mais depressa possível"><span>O mais depressa possível</span></label>
+            <label class="opt"><input type="radio" name="prazo" value="Nos próximos 3 meses"><span>Nos próximos 3 meses</span></label>
+            <label class="opt"><input type="radio" name="prazo" value="Dentro de 6 meses"><span>Dentro de 6 meses</span></label>
+            <label class="opt"><input type="radio" name="prazo" value="Só quero saber o valor"><span>Só quero saber o valor</span></label>
+          </div>
+          <label class="f" for="situacao">A casa está… <small>(opcional)</small></label>
+          <select class="t" id="situacao" name="situacao">
+            <option value="">Escolha…</option>
+            <option>Habitada por mim</option>
+            <option>Vazia</option>
+            <option>Arrendada</option>
+            <option>Em herança ou partilhas</option>
+          </select>
+          <div class="err" role="alert"></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="4" data-contact hidden>
+          <legend>Para onde enviamos a proposta?</legend>
+          <label class="f" for="nome">Nome</label>
+          <input class="t" id="nome" name="nome" autocomplete="name" required>
+          <div class="row2">
+            <div>
+              <label class="f" for="tel">Telemóvel</label>
+              <input class="t" id="tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel" placeholder="912 345 678" required>
+            </div>
+            <div>
+              <label class="f" for="email">Email <small>(opcional)</small></label>
+              <input class="t" id="email" name="email" type="email" autocomplete="email">
+            </div>
+          </div>
+          <label class="f" for="hora">Melhor hora para lhe ligarmos <small>(opcional)</small></label>
+          <select class="t" id="hora" name="hora">
+            <option value="">Qualquer hora</option>
+            <option>Manhã (9h–13h)</option>
+            <option>Tarde (14h–18h)</option>
+            <option>Fim do dia (18h–20h)</option>
+          </select>
+          <label class="check"><input type="checkbox" name="consentimento" id="rgpd" required><span>Aceito que a Urban Focus use estes dados para me contactar sobre a venda da casa, conforme a <a href="/privacidade" target="_blank" rel="noopener">política de privacidade</a>.</span></label>
+          <label class="check"><input type="checkbox" name="novidades" id="news"><span>Quero receber ocasionalmente novidades da Urban Focus. <small>(opcional)</small></span></label>
+          <div class="err" role="alert"></div>
+        </fieldset>
+        <input type="hidden" name="utm_source"><input type="hidden" name="utm_medium"><input type="hidden" name="utm_campaign"><input type="hidden" name="utm_content"><input type="hidden" name="pagina">
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Não preencher<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="nav">
+          <button type="button" class="btn back" id="back" hidden>Voltar</button>
+          <button type="button" class="btn go" id="next">Continuar</button>
+        </div>
+        <p class="fine" id="fine">Os seus dados ficam só com a Urban Focus e servem para lhe responder. Não os partilhamos com terceiros. <a href="/privacidade">Saiba mais</a>.</p>
+      </form>
+      <div class="done" id="done" hidden tabindex="-1">
+        <div class="tick"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h2>Obrigado<span id="dname-wrap">, <span id="dname"></span></span>.</h2>
+        <p>Recebemos o seu pedido. Ligamos-lhe hoje (em dias úteis) para combinar uma visita e enviamos a proposta escrita em 24 horas.</p>
+        <p>Se preferir, ligue-nos já: <a href="tel:+351965156475"><b>965 156 475</b></a>.</p>
+      </div>
+      </div>
+    </div>
+  </section>
+    <section class="band" data-track-section="Como funciona">
+      <div class="wrap">
+        <h2>Como funciona</h2>
+        <ol class="steps3">
+          <li><b>Conte-nos sobre a casa</b><p>Um minuto, por aqui ou por telefone. Sem compromisso.</p></li>
+          <li><b>Visitamos uma vez</b><p>Vemos a casa consigo, no dia que lhe der jeito. Uma só visita.</p></li>
+          <li><b>Proposta escrita em 24 horas</b><p>Se aceitar, tratamos dos papéis até à escritura e escolhe a data.</p></li>
+        </ol>
+      </div>
+    </section>
+    <section class="band" style="padding-top:0" data-track-section="Casos">
+      <div class="wrap">
+        <h2>Compramos casas que outros deixam para trás</h2>
+        <ul class="cases">
+          <li><b>Heranças</b><span>Partilhas por fazer, vários herdeiros, papéis por tratar.</span></li>
+          <li><b>Casas com obras</b><span>No estado em que estão: não precisa de arranjar nada.</span></li>
+          <li><b>Com inquilinos</b><span>Arrendada ou ocupada: falamos sobre a melhor forma.</span></li>
+          <li><b>Pressa em vender</b><span>Mudança, dívidas ou divórcio: a data da escritura é sua.</span></li>
+        </ul>
+      </div>
+    </section>
+    <section class="band faq" style="padding-top:0" data-track-section="Perguntas">
+      <div class="wrap">
+        <h2>Perguntas frequentes</h2>
+        <details><summary>Tenho de pagar alguma coisa ou comissão?</summary><p>Não. A Urban Focus compra a casa diretamente; não há comissão de mediação para si.</p></details>
+        <details><summary>A proposta obriga-me a vender?</summary><p>Não. Recebe a proposta por escrito e decide com calma. Se não fizer sentido, não há custos nem compromisso.</p></details>
+        <details><summary>E se a casa tiver dívidas, hipoteca ou papéis por tratar?</summary><p>É comum. Vemos consigo a situação e o que é preciso até à escritura; muitas vezes tratamos nós dos documentos.</p></details>
+        <details><summary>Quanto tempo demora?</summary><p>A proposta segue em 24 horas depois da visita. A escritura é marcada para a data que combinarmos consigo.</p></details>
+      </div>
+    </section>
+    <section class="band cta-end" data-track-section="Pedido final">
+      <div class="wrap">
+        <h2>Saiba quanto lhe oferecemos pela sua casa</h2>
+        <p>Sem compromisso. Proposta escrita em 24 horas.</p>
+        <a class="btn go" href="#pedido" data-to-form data-track="Vender A · pedir proposta (fim)">Pedir proposta</a>
+      </div>
+    </section>
+  </main>
+  <footer class="foot">
+    <div class="wrap">
+      <span>Urban Focus, Lda. · NIPC 519136330 · Vila Franca de Xira</span>
+      <nav aria-label="Informação legal">
+        <a href="/">Início</a>
+        <a href="/privacidade">Política de privacidade</a>
+        <a href="/termos">Termos e condições</a>
+        <a href="https://www.livroreclamacoes.pt" target="_blank" rel="noopener">Livro de Reclamações</a>
+        <a href="https://www.casa361.com/lista-propriedades?max=12" target="_blank" rel="noopener" data-track="Vender A · comprar casa (Casa 361)">Quer comprar casa? Casa 361</a>
+      </nav>
+    </div>
+  </footer>
+  <script src="/vender/funil.js" defer></script>
+</body>
+</html>

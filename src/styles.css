@@ -445,3 +445,45 @@ section { scroll-margin-top: 70px; }
 .preview-bar { background: #FFF3D6; color: #5A4520; font-size: 13px; text-align: center; padding: 8px 16px; }
 .member-ph { display: grid; place-items: center; aspect-ratio: 1; background: var(--stone-2); color: var(--muted); font-size: 14px; }
 .is-preview .member figcaption::before, .is-preview .story::before { content: 'Exemplo'; justify-self: start; align-self: start; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; background: #FFF3D6; color: #5A4520; padding: 3px 8px; border-radius: 2px; margin-bottom: 4px; }
+
+/* Parceiros: Casa 361, for people who want to buy. Their logo sits on its own
+   black, so the tile takes that colour and the logo reads as printed on it. */
+.partner { background: var(--paper); padding: 72px 0; scroll-margin-top: 80px; }
+.partner-in { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: center; }
+.partner-logo { display: block; background: #191919; border-radius: 6px; padding: 28px; }
+.partner-logo img { width: 100%; height: auto; }
+.partner-logo:hover { box-shadow: 0 0 0 2px var(--gold); }
+.partner-copy p { color: var(--muted); max-width: 56ch; }
+.partner-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+@media (max-width: 760px) {
+  .partner { padding: 52px 0; }
+  .partner-in { grid-template-columns: 1fr; gap: 28px; }
+  .partner-logo { max-width: 420px; }
+}
+
+/* ── Seller page, oct 2026 ── */
+.btn-lg { min-height: 54px; padding: 0 28px; font-size: 16px; font-weight: 600; }
+.hero-actions .btn-lg { flex-basis: 100%; max-width: 420px; }
+.topbar-buy a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.assure { background: var(--ink); color: #E7E2DA; border-top: 1px solid rgba(255,255,255,.08); }
+.assure-in { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; padding-top: 0; padding-bottom: 0; }
+.assure-in p { margin: 0; padding: 22px 20px; border-left: 1px solid rgba(255,255,255,.1); display: flex; flex-direction: column; gap: 4px; }
+.assure-in p:first-child { border-left: 0; padding-left: 0; }
+.assure-in b { font-family: var(--serif); font-weight: 500; font-size: 19px; color: #D9BE8C; }
+.assure-in span { font-size: 14px; color: #CFC8BD; }
+.footer-4 { grid-template-columns: 1.3fr 1fr 1fr 1fr; }
+.footer-id { font-size: 12px; line-height: 1.6; color: #8F887E; margin-top: 14px; }
+.footer-partners p { display: flex; flex-direction: column; margin: 0 0 12px; }
+.footer-partners span { font-size: 12px; color: #8F887E; }
+.footer-base .legal { font-size: 13px; }
+@media (max-width: 900px) {
+  .assure-in { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .assure-in p { border-left: 0; padding-left: 0; border-top: 1px solid rgba(255,255,255,.1); }
+  .footer-4 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 700px) { .topbar-buy { display: none; } }
+@media (max-width: 520px) {
+  .assure-in { grid-template-columns: 1fr; }
+  .footer-4 { grid-template-columns: 1fr; }
+  .hero-actions .btn-lg { max-width: none; }
+}

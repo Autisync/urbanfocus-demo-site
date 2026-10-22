@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Urban Focus · Peça uma proposta pela sua casa</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#13161A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script>
+    // A/B: half the visits see /vender/a, half /vender/b. The same person keeps
+    // the same page (localStorage). ?v=a or ?v=b forces one (to check them).
+    // The link's utm_* and anything else in it go along unchanged.
+    (function () {
+      var q = new URLSearchParams(location.search);
+      var forced = (q.get('v') || '').toLowerCase();
+      var v = forced === 'a' || forced === 'b' ? forced : null;
+      if (!v) { try { v = localStorage.getItem('uf_vender_v'); } catch (e) { v = null; } }
+      if (v !== 'a' && v !== 'b') v = Math.random() < 0.5 ? 'a' : 'b';
+      try { localStorage.setItem('uf_vender_v', v); } catch (e) { /* private mode: still split */ }
+      q.delete('v');
+      var rest = q.toString();
+      location.replace('/vender/' + v + (rest ? '?' + rest : '') + location.hash);
+    })();
+  </script>
+</head>
+<body>
+  <noscript><p><a href="/vender/a">Peça a sua proposta</a></p></noscript>
+</body>
+</html>
