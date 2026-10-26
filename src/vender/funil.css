@@ -116,3 +116,12 @@ legend { font-weight: 600; font-size: 17px; margin-bottom: 10px; padding: 0; }
 .steps3 .step-kicker { display: block; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep, #8C6C3A); margin-bottom: 2px; }
 .footnote { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
 @media (min-width: 760px) { .cases { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Livro de Reclamações Eletrónico: the official logo, linked, in every footer
+   (DL 156/2005, art. 9.º-A as amended: visible and prominent on the site).
+   If the image is missing, the link shows as text. */
+.lre { display: inline-block; margin-top: 0; line-height: 0; border-radius: 4px; }
+.lre img { display: block; width: 160px; height: auto; }
+.lre.lre-text { line-height: 1.4; border: 1px solid rgba(255,255,255,.35); padding: 6px 10px; color: #fff; }
+.lre.lre-text::after { content: 'Livro de Reclamações'; font-size: 13px; font-weight: 600; }
+.lre:focus-visible { outline: 2px solid #D9BE8C; outline-offset: 4px; }

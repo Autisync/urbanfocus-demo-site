@@ -7,12 +7,13 @@
 (function () {
   'use strict';
   if (!('IntersectionObserver' in window)) return;
-  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // Visitors who ask for less motion get a plain fade, without the movement.
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('calm');
   var SEL = [
     '.hero-copy > *', '.form-card', '.assure-in > p',
     '.section-title', '.section-sub', '.time-chart', '.cmp-table-wrap', '.cmp-cta',
     '.how-photos img', '.steps li', '.footnote', '.case-grid article',
-    '.about-copy > *', '.values li', '.about-facts', '.team-intro > *', '.member',
+    '.about-copy > *', '.values-title', '.values li', '.about-facts', '.about-end', '.team-intro > *', '.member',
     '.story-carousel', '.book-copy > *', '.book-steps li', '.faq details',
     '.partner-logo', '.partner-copy > *', '.final-in > *',
   ].join(',');
