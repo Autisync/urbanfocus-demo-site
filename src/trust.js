@@ -119,65 +119,88 @@ if (/[?&]preview\b/.test(location.search)) {
       if (stories.length < 2) {
         grid.innerHTML = stories.map(slide).join('');
       } else {
-        // A carousel: one testimonial at a time, swipe or arrows, dots to jump.
-        // It moves on by itself every 6 seconds while it is on screen, holds
-        // while the visitor reads (pointer over it, keyboard focus in it) and
-        // has a pause button. Visitors who ask for less motion get the same
-        // rotation without the sliding (the next one simply appears).
-        grid.className = 'story-carousel';
+        // The testimonials wheel (after Binu Paul's "Testimonials" concept on
+        // Dribbble): the clients on a curved line on the left, the one being
+        // read in the middle and larger; their words on the right, with a
+        // drop cap. It turns by itself every 7 seconds while on screen, holds
+        // while the visitor points at it or uses the keyboard in it, and has a
+        // pause button. No photos or star ratings: only what clients gave us.
+        var initials = function (n) { return String(n || '').split(/\s+/).filter(Boolean).slice(0, 2).map(function (w) { return w.charAt(0).toUpperCase(); }).join(''); };
+        grid.className = 'tst';
         grid.setAttribute('role', 'region');
         grid.setAttribute('aria-roledescription', 'carrossel');
         grid.setAttribute('aria-label', 'Testemunhos de clientes');
-        grid.innerHTML = '<div class="story-track" tabindex="0">' + stories.map(slide).join('') + '</div>' +
-          '<div class="story-nav">' +
-            '<button type="button" class="story-btn" data-dir="-1" aria-label="Testemunho anterior">‹</button>' +
-            '<div class="story-dots">' + stories.map(function (_, i) { return '<button type="button" class="story-dot" data-i="' + i + '" aria-label="Ver o testemunho ' + (i + 1) + '"></button>'; }).join('') + '</div>' +
-            '<button type="button" class="story-btn" data-dir="1" aria-label="Testemunho seguinte">›</button>' +
-            '<button type="button" class="story-play" aria-pressed="false">Pausar</button>' +
+        grid.innerHTML =
+          '<div class="tst-wheel">' +
+            '<svg class="tst-arc" viewBox="0 0 120 400" preserveAspectRatio="none" aria-hidden="true"><path d="M70 0 C 10 120, 10 280, 70 400" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>' +
+            '<div class="tst-people" role="tablist" aria-label="Escolher testemunho">' +
+              stories.map(function (st, i) {
+                return '<button type="button" class="tst-person" role="tab" id="tst-p' + i + '" aria-controls="tst-quote" data-i="' + i + '">' +
+                  '<span class="tst-avatar" aria-hidden="true">' + esc(initials(st.name)) + '</span>' +
+                  '<span class="tst-who"><b>' + esc(st.name || '') + '</b>' + (st.situation || st.place ? '<small>' + esc([st.situation, st.place].filter(Boolean).join(' · ')) + '</small>' : '<small>Cliente UrbanFocus</small>') + '</span>' +
+                '</button>';
+              }).join('') +
+            '</div>' +
+          '</div>' +
+          '<div class="tst-main">' +
+            '<span class="tst-mark" aria-hidden="true">“</span>' +
+            '<div id="tst-quote" class="tst-quote" role="tabpanel" aria-live="polite"></div>' +
+            '<div class="tst-nav">' +
+              '<button type="button" class="story-btn" data-dir="-1" aria-label="Testemunho anterior">‹</button>' +
+              '<span class="tst-count" aria-hidden="true"></span>' +
+              '<button type="button" class="story-btn" data-dir="1" aria-label="Testemunho seguinte">›</button>' +
+              '<button type="button" class="story-play" aria-pressed="false">Pausar</button>' +
+            '</div>' +
           '</div>';
-        var track = grid.querySelector('.story-track');
-        var dots = grid.querySelectorAll('.story-dot');
-        var at = 0;
+        var people = grid.querySelectorAll('.tst-person');
+        var quoteBox = grid.querySelector('.tst-quote');
+        var count = grid.querySelector('.tst-count');
+        var n = stories.length, at = 0;
         var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var go = function (i, smooth) {
-          at = (i + stories.length) % stories.length;
-          track.scrollTo({ left: track.clientWidth * at, behavior: (smooth === false || calm) ? 'auto' : 'smooth' });
-          mark();
+        var render = function () {
+          Array.prototype.forEach.call(people, function (el, k) {
+            var d = ((k - at) % n + n) % n; if (d > n / 2) d -= n;   // -2 … 2
+            el.setAttribute('data-pos', Math.abs(d) > 1 ? (d < 0 ? 'far-up' : 'far-down') : String(d));
+            el.setAttribute('aria-selected', d === 0 ? 'true' : 'false');
+            el.tabIndex = d === 0 ? 0 : -1;
+          });
+          var st = stories[at];
+          quoteBox.classList.remove('is-in');
+          var paint = function () {
+            quoteBox.innerHTML = '<blockquote>' + esc(st.quote || '') + '</blockquote>' +
+              '<p class="tst-by"><b>' + esc(st.name || '') + '</b>' + (st.solved ? '<span>' + esc(st.solved) + '</span>' : '') + '</p>';
+            quoteBox.setAttribute('aria-labelledby', 'tst-p' + at);
+            void quoteBox.offsetWidth; quoteBox.classList.add('is-in');
+          };
+          if (calm) paint(); else setTimeout(paint, quoteBox.innerHTML ? 180 : 0);
+          count.textContent = (at + 1) + ' / ' + n;
         };
-        var mark = function () { Array.prototype.forEach.call(dots, function (d, k) { d.setAttribute('aria-current', k === at ? 'true' : 'false'); }); };
-        grid.addEventListener('click', function (e) {
-          var b = e.target.closest('.story-btn'); if (b) { go(at + Number(b.getAttribute('data-dir'))); restart(); return; }
-          var d = e.target.closest('.story-dot'); if (d) { go(Number(d.getAttribute('data-i'))); restart(); }
-        });
-        var t0 = null;
-        track.addEventListener('scroll', function () {
-          clearTimeout(t0);
-          t0 = setTimeout(function () { var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); if (i !== at) { at = i; mark(); } }, 80);
-        }, { passive: true });
-        track.addEventListener('keydown', function (e) {
-          if (e.key === 'ArrowRight') { e.preventDefault(); go(at + 1); restart(); }
-          if (e.key === 'ArrowLeft') { e.preventDefault(); go(at - 1); restart(); }
-        });
-        addEventListener('resize', function () { go(at, false); });
+        var go = function (i) { at = ((i % n) + n) % n; render(); };
         var timer = null, held = false, paused = false;
         var pb = grid.querySelector('.story-play');
-        var play = function () { if (paused || timer) return; timer = setInterval(function () { if (!held && !document.hidden) go(at + 1); }, 6000); };
+        var play = function () { if (paused || timer) return; timer = setInterval(function () { if (!held && !document.hidden) go(at + 1); }, 7000); };
         var stop = function () { clearInterval(timer); timer = null; };
+        var restart = function () { stop(); play(); };
+        grid.addEventListener('click', function (e) {
+          var b = e.target.closest('.story-btn'); if (b) { go(at + Number(b.getAttribute('data-dir'))); restart(); return; }
+          var p = e.target.closest('.tst-person'); if (p) { go(Number(p.getAttribute('data-i'))); restart(); }
+        });
         pb.addEventListener('click', function () {
           paused = !paused; pb.setAttribute('aria-pressed', paused ? 'true' : 'false');
           pb.textContent = paused ? 'Continuar' : 'Pausar';
           if (paused) stop(); else play();
         });
+        grid.querySelector('.tst-people').addEventListener('keydown', function (e) {
+          var k = e.key;
+          if (k === 'ArrowDown' || k === 'ArrowRight') { e.preventDefault(); go(at + 1); restart(); people[at].focus(); }
+          if (k === 'ArrowUp' || k === 'ArrowLeft') { e.preventDefault(); go(at - 1); restart(); people[at].focus(); }
+        });
         // Only a mouse resting on it holds it: a tap on a phone must not.
         grid.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') held = true; });
         grid.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') held = false; });
-        grid.addEventListener('focusin', function (e) { if (e.target === track || (e.target.matches && e.target.matches(':focus-visible'))) held = true; });
+        grid.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) held = true; });
         grid.addEventListener('focusout', function () { held = false; });
-        var restart = function () { stop(); play(); };
-        track.addEventListener('pointerdown', function () { held = true; });
-        track.addEventListener('pointerup', function () { held = false; restart(); });
-        mark();
-        // Start moving only once it is on screen.
+        render();
         if ('IntersectionObserver' in window) {
           new IntersectionObserver(function (es) { if (es[0].isIntersecting) play(); else stop(); }, { threshold: 0.25 }).observe(grid);
         } else play();
