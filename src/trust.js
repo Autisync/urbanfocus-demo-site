@@ -98,7 +98,7 @@ if (/[?&]preview\b/.test(location.search)) {
         '<div class="team-grid">' + team.map(function (m) {
         return '<figure class="member">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + ', ' + esc(m.role || '') + '" loading="lazy" width="720" height="960">' : '<span class="member-ph">Fotografia</span>') +
           '<figcaption><b>' + esc(m.name) + '</b><span>' + esc(m.role || '') + '</span>' + (m.area ? '<small>' + esc(m.area) + '</small>' : '') +
-          (m.line ? '<p>«' + esc(m.line) + '»</p>' : '') + '</figcaption></figure>';
+          (m.line ? '<p>' + esc(m.line) + '</p>' : '') + '</figcaption></figure>';
       }).join('') + '</div>';
       t.hidden = false;
     }
