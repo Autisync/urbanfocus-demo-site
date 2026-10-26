@@ -667,11 +667,17 @@ html.anim.calm .reveal { transform: none; transition: opacity .5s ease; transiti
 }
 @media (prefers-reduced-motion: reduce) { .tsq-q { transition: opacity .3s ease; transform: none; } .tsq-card.is-running .tsq-bar i { animation: none; } }
 
-/* How it works: the two photos side by side across the full width, the same
-   size and the same light, then the three steps in a row under them. */
-.how-in { display: block; }
-@media (min-width: 901px) { .how-in { grid-template-columns: none; } }
-.how-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: none; padding: 0; margin-bottom: 48px; }
-.how-photos img, .how-photos img:first-child, .how-photos img:last-child { position: static; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; margin: 0; border: 0; border-radius: 10px; box-shadow: 0 24px 50px -34px rgba(19, 22, 26, .5); }
-@media (min-width: 901px) { .how-in .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; } }
-@media (max-width: 600px) { .how-photos { grid-template-columns: 1fr; gap: 14px; margin-bottom: 32px; } }
+/* How it works: photos on the left, the steps on the right. The two photos
+   are the same size, one set higher and one lower, and together they are
+   exactly as tall as the text beside them, so neither side has empty space. */
+.how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: stretch; }
+.how-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: none; padding: 0; margin: 0; min-height: 520px; }
+.how-photos img, .how-photos img:first-child, .how-photos img:last-child { position: static; width: 100%; height: calc(100% - 72px); min-height: 0; aspect-ratio: auto; object-fit: cover; margin: 0; border: 0; border-radius: 10px; box-shadow: 0 24px 50px -34px rgba(19, 22, 26, .5); }
+.how-photos img:first-child { align-self: start; object-position: 22% 88%; }
+.how-photos img:last-child { align-self: end; object-position: 62% 45%; }
+.how-in .steps { grid-template-columns: 1fr; gap: 22px; }
+@media (max-width: 900px) {
+  .how-in { grid-template-columns: 1fr; gap: 32px; }
+  .how-photos { min-height: 0; height: 420px; }
+}
+@media (max-width: 520px) { .how-photos { height: 340px; gap: 12px; } .how-photos img, .how-photos img:first-child, .how-photos img:last-child { height: calc(100% - 40px); } }
