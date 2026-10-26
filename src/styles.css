@@ -536,3 +536,9 @@ section { scroll-margin-top: 70px; }
 .nav-links { gap: 18px; font-size: 13.5px; }
 .nav-links a.nav-buy { padding-left: 16px; }
 @media (max-width: 1239px) { .nav-links { display: none; } .nav-cta { margin-left: auto; } .nav-menu { display: block; } }
+
+/* The doors are back (Luís), shorter: about one screen of scrolling instead
+   of two, and "Saltar a entrada" lands on the offer below the menu. */
+.entrance { height: 190vh; }
+@media (max-width: 700px) { .entrance { height: 170vh; } }
+#oferta { scroll-margin-top: 68px; }
