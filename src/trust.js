@@ -14,8 +14,22 @@ window.UF_STATS = [
   // { value: '24 h', label: 'Para a proposta escrita' },
 ];
 
+// The team, from Luís (26 Oct 2026): photo, name, role, what they do, their words.
+window.UF_TEAM_INTRO = {
+  title: 'Uma equipa focada em encontrar a solução certa para o seu imóvel',
+  text: [
+    'Na UrbanFocus, compramos imóveis diretamente aos proprietários, com um processo simples, transparente e personalizado.',
+    'A nossa equipa combina capacidade de negociação, acompanhamento próximo e análise rigorosa de cada oportunidade, para apresentar soluções ajustadas a cada imóvel e a cada proprietário.',
+  ],
+  tagline: 'Compramos diretamente. Tratamos de tudo. Simplificamos o processo.',
+};
 window.UF_TEAM = [
-  // { name: 'Luís', role: 'Fundador · Aquisições', photo: '/img/equipa/luis.jpg', line: 'Visito cada imóvel e faço a proposta.' },
+  { name: 'Luís Poças', role: 'Gestor de Aquisições Imobiliárias', area: 'Negociação e desenvolvimento de oportunidades', photo: '/img/equipa/luis.jpg',
+    line: 'Transformo oportunidades imobiliárias em negócios concretos, combinando visão estratégica, rigor na negociação e total transparência.' },
+  { name: 'Martim André', role: 'Comprador Júnior', area: 'Prospeção e acompanhamento de proprietários', photo: '/img/equipa/martim.jpg',
+    line: 'Foco-me no contacto próximo e na disponibilidade para apoiar cada proprietário, encontrando a solução certa para cada imóvel com total transparência.' },
+  { name: 'Andreia André', role: 'Analista de Investimento Imobiliário', area: 'Avaliação e viabilidade dos investimentos', photo: '/img/equipa/andreia.jpg',
+    line: 'Analiso cada oportunidade com rigor e visão de mercado, fundamentando decisões sólidas e propostas ajustadas à realidade de cada imóvel.' },
 ];
 
 window.UF_STORIES = [
@@ -76,9 +90,15 @@ if (/[?&]preview\b/.test(location.search)) {
     var team = (window.UF_TEAM || []).filter(function (m) { return m && m.name; });
     var t = document.querySelector('[data-team]');
     if (t && team.length) {
-      t.innerHTML = '<h3>A equipa</h3><div class="team-grid">' + team.map(function (m) {
-        return '<figure class="member">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + '" loading="lazy">' : '<span class="member-ph">Fotografia</span>') +
-          '<figcaption><b>' + esc(m.name) + '</b><span>' + esc(m.role || '') + '</span>' + (m.line ? '<p>' + esc(m.line) + '</p>' : '') + '</figcaption></figure>';
+      var intro = window.UF_TEAM_INTRO || null;
+      t.innerHTML = (intro
+        ? '<div class="team-intro"><h3>' + esc(intro.title) + '</h3>' + (intro.text || []).map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('') +
+          (intro.tagline ? '<p class="team-tagline"><b>UrbanFocus</b> — ' + esc(intro.tagline) + '</p>' : '') + '</div>'
+        : '<h3>A equipa</h3>') +
+        '<div class="team-grid">' + team.map(function (m) {
+        return '<figure class="member">' + (m.photo ? '<img src="' + esc(m.photo) + '" alt="' + esc(m.name) + ', ' + esc(m.role || '') + '" loading="lazy" width="720" height="960">' : '<span class="member-ph">Fotografia</span>') +
+          '<figcaption><b>' + esc(m.name) + '</b><span>' + esc(m.role || '') + '</span>' + (m.area ? '<small>' + esc(m.area) + '</small>' : '') +
+          (m.line ? '<p>«' + esc(m.line) + '»</p>' : '') + '</figcaption></figure>';
       }).join('') + '</div>';
       t.hidden = false;
     }
