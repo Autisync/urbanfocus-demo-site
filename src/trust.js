@@ -119,87 +119,76 @@ if (/[?&]preview\b/.test(location.search)) {
       if (stories.length < 2) {
         grid.innerHTML = stories.map(slide).join('');
       } else {
-        // The testimonials wheel (after Binu Paul's "Testimonials" concept on
-        // Dribbble): the clients on a curved line on the left, the one being
-        // read in the middle and larger; their words on the right, with a
-        // drop cap. It turns by itself every 7 seconds while on screen, holds
-        // while the visitor points at it or uses the keyboard in it, and has a
-        // pause button. No photos or star ratings: only what clients gave us.
-        var initials = function (n) { return String(n || '').split(/\s+/).filter(Boolean).slice(0, 2).map(function (w) { return w.charAt(0).toUpperCase(); }).join(''); };
-        grid.className = 'tst';
+        // Testimonials, after Rabii Mhamdi's "Testimonials Sections" (SquareUi)
+        // on Dribbble: the title on the left, one quote at a time on the
+        // right, set large, with the client's name under a thin rule and the
+        // arrows beside it. All quotes share one grid cell, so the box is as
+        // tall as the longest and nothing jumps. It moves on by itself every
+        // 7 seconds while on screen, holds while a mouse rests on it or the
+        // keyboard is in it, and has a pause button.
+        grid.className = 'tsq-card';
         grid.setAttribute('role', 'region');
         grid.setAttribute('aria-roledescription', 'carrossel');
         grid.setAttribute('aria-label', 'Testemunhos de clientes');
         grid.innerHTML =
-          '<div class="tst-wheel">' +
-            '<svg class="tst-arc" viewBox="0 0 120 400" preserveAspectRatio="none" aria-hidden="true"><path d="M70 0 C 10 120, 10 280, 70 400" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>' +
-            '<div class="tst-people" role="tablist" aria-label="Escolher testemunho">' +
-              stories.map(function (st, i) {
-                return '<button type="button" class="tst-person" role="tab" id="tst-p' + i + '" aria-controls="tst-quote" data-i="' + i + '">' +
-                  '<span class="tst-avatar" aria-hidden="true">' + esc(initials(st.name)) + '</span>' +
-                  '<span class="tst-who"><b>' + esc(st.name || '') + '</b>' + (st.situation || st.place ? '<small>' + esc([st.situation, st.place].filter(Boolean).join(' · ')) + '</small>' : '<small>Cliente UrbanFocus</small>') + '</span>' +
-                '</button>';
-              }).join('') +
-            '</div>' +
-          '</div>' +
-          '<div class="tst-main">' +
-            '<span class="tst-mark" aria-hidden="true">“</span>' +
-            '<div id="tst-quote" class="tst-quote" role="tabpanel" aria-live="polite"></div>' +
-            '<div class="tst-nav">' +
-              '<button type="button" class="story-btn" data-dir="-1" aria-label="Testemunho anterior">‹</button>' +
-              '<span class="tst-count" aria-hidden="true"></span>' +
-              '<button type="button" class="story-btn" data-dir="1" aria-label="Testemunho seguinte">›</button>' +
-              '<button type="button" class="story-play" aria-pressed="false">Pausar</button>' +
+          '<div class="tsq-quotes">' + stories.map(function (st, i) {
+            return '<figure class="tsq-q" id="tsq-' + i + '" role="group" aria-roledescription="testemunho" aria-label="' + (i + 1) + ' de ' + stories.length + '">' +
+              '<blockquote>“' + esc(st.quote || '') + '”</blockquote>' +
+              '<figcaption><b>' + esc(st.name || '') + '</b><span>' + esc([st.situation, st.place].filter(Boolean).join(' · ') || 'Cliente UrbanFocus') + '</span></figcaption>' +
+            '</figure>';
+          }).join('') + '</div>' +
+          '<div class="tsq-foot">' +
+            '<span class="tsq-count" aria-hidden="true"></span>' +
+            '<span class="tsq-bar" aria-hidden="true"><i></i></span>' +
+            '<div class="tsq-ctl">' +
+              '<button type="button" class="tsq-btn tsq-play" aria-pressed="false" aria-label="Pausar"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path class="i-pause" d="M4 3h3v10H4zM9 3h3v10H9z" fill="currentColor"/><path class="i-play" d="M5 3l8 5-8 5z" fill="currentColor"/></svg></button>' +
+              '<button type="button" class="tsq-btn" data-dir="-1" aria-label="Testemunho anterior"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>' +
+              '<button type="button" class="tsq-btn" data-dir="1" aria-label="Testemunho seguinte"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>' +
             '</div>' +
           '</div>';
-        var people = grid.querySelectorAll('.tst-person');
-        var quoteBox = grid.querySelector('.tst-quote');
-        var count = grid.querySelector('.tst-count');
-        var n = stories.length, at = 0;
-        var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var qs = grid.querySelectorAll('.tsq-q');
+        var count = grid.querySelector('.tsq-count');
+        var bar = grid.querySelector('.tsq-bar i');
+        var n = stories.length, at = 0, DUR = 7000;
         var render = function () {
-          Array.prototype.forEach.call(people, function (el, k) {
-            var d = ((k - at) % n + n) % n; if (d > n / 2) d -= n;   // -2 … 2
-            el.setAttribute('data-pos', Math.abs(d) > 1 ? (d < 0 ? 'far-up' : 'far-down') : String(d));
-            el.setAttribute('aria-selected', d === 0 ? 'true' : 'false');
-            el.tabIndex = d === 0 ? 0 : -1;
+          Array.prototype.forEach.call(qs, function (q, k) {
+            q.classList.toggle('is-on', k === at);
+            q.setAttribute('aria-hidden', k === at ? 'false' : 'true');
           });
-          var st = stories[at];
-          quoteBox.classList.remove('is-in');
-          var paint = function () {
-            quoteBox.innerHTML = '<blockquote>' + esc(st.quote || '') + '</blockquote>' +
-              '<p class="tst-by"><b>' + esc(st.name || '') + '</b>' + (st.solved ? '<span>' + esc(st.solved) + '</span>' : '') + '</p>';
-            quoteBox.setAttribute('aria-labelledby', 'tst-p' + at);
-            void quoteBox.offsetWidth; quoteBox.classList.add('is-in');
-          };
-          if (calm) paint(); else setTimeout(paint, quoteBox.innerHTML ? 180 : 0);
-          count.textContent = (at + 1) + ' / ' + n;
+          count.textContent = String(at + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
+          bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';
+          grid.classList.toggle('is-running', !!timer && !paused);
         };
         var go = function (i) { at = ((i % n) + n) % n; render(); };
         var timer = null, held = false, paused = false;
-        var pb = grid.querySelector('.story-play');
-        var play = function () { if (paused || timer) return; timer = setInterval(function () { if (!held && !document.hidden) go(at + 1); }, 7000); };
-        var stop = function () { clearInterval(timer); timer = null; };
-        var restart = function () { stop(); play(); };
+        var pb = grid.querySelector('.tsq-play');
+        var play = function () { if (paused || held || timer) return; timer = setInterval(function () { if (!document.hidden) go(at + 1); }, DUR); render(); };
+        var stop = function () { clearInterval(timer); timer = null; grid.classList.remove('is-running'); };
+        var restart = function () { stop(); play(); render(); };
         grid.addEventListener('click', function (e) {
-          var b = e.target.closest('.story-btn'); if (b) { go(at + Number(b.getAttribute('data-dir'))); restart(); return; }
-          var p = e.target.closest('.tst-person'); if (p) { go(Number(p.getAttribute('data-i'))); restart(); }
+          var b = e.target.closest('[data-dir]'); if (b) { go(at + Number(b.getAttribute('data-dir'))); restart(); }
         });
         pb.addEventListener('click', function () {
           paused = !paused; pb.setAttribute('aria-pressed', paused ? 'true' : 'false');
-          pb.textContent = paused ? 'Continuar' : 'Pausar';
+          pb.setAttribute('aria-label', paused ? 'Continuar' : 'Pausar');
           if (paused) stop(); else play();
         });
-        grid.querySelector('.tst-people').addEventListener('keydown', function (e) {
-          var k = e.key;
-          if (k === 'ArrowDown' || k === 'ArrowRight') { e.preventDefault(); go(at + 1); restart(); people[at].focus(); }
-          if (k === 'ArrowUp' || k === 'ArrowLeft') { e.preventDefault(); go(at - 1); restart(); people[at].focus(); }
+        grid.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight') { e.preventDefault(); go(at + 1); restart(); }
+          if (e.key === 'ArrowLeft') { e.preventDefault(); go(at - 1); restart(); }
         });
+        // Swipe on a phone.
+        var x0 = null;
+        grid.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+        grid.addEventListener('touchend', function (e) {
+          if (x0 == null) return; var dx = e.changedTouches[0].clientX - x0; x0 = null;
+          if (Math.abs(dx) > 40) { go(at + (dx < 0 ? 1 : -1)); restart(); }
+        }, { passive: true });
         // Only a mouse resting on it holds it: a tap on a phone must not.
-        grid.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') held = true; });
-        grid.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') held = false; });
-        grid.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) held = true; });
-        grid.addEventListener('focusout', function () { held = false; });
+        grid.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { held = true; stop(); } });
+        grid.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { held = false; play(); } });
+        grid.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) { held = true; stop(); } });
+        grid.addEventListener('focusout', function () { held = false; play(); });
         render();
         if ('IntersectionObserver' in window) {
           new IntersectionObserver(function (es) { if (es[0].isIntersecting) play(); else stop(); }, { threshold: 0.25 }).observe(grid);

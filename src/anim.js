@@ -14,7 +14,7 @@
     '.section-title', '.section-sub', '.time-chart', '.cmp-table-wrap', '.cmp-cta',
     '.how-photos img', '.steps li', '.footnote', '.case-grid article',
     '.about-copy > *', '.values-title', '.values li', '.about-facts', '.about-end', '.team-intro > *', '.member',
-    '.tst', '.book-copy > *', '.book-steps li', '.faq details',
+    '.tsq-intro > *', '.tsq-card', '.book-copy > *', '.book-steps li', '.faq details',
     '.partner-logo', '.partner-copy > *', '.final-in > *',
   ].join(',');
   function ready(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
