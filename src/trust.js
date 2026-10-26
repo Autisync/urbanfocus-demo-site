@@ -16,12 +16,12 @@ window.UF_STATS = [
 
 // The team, from Luís (26 Oct 2026): photo, name, role, what they do, their words.
 window.UF_TEAM_INTRO = {
-  title: 'Uma equipa focada em encontrar a solução certa para o seu imóvel',
+  title: 'Uma equipa de confiança. Um processo transparente.',
   text: [
-    'Na UrbanFocus, compramos imóveis diretamente aos proprietários, com um processo simples, transparente e personalizado.',
-    'A nossa equipa combina capacidade de negociação, acompanhamento próximo e análise rigorosa de cada oportunidade, para apresentar soluções ajustadas a cada imóvel e a cada proprietário.',
+    'Na UrbanFocus, compramos imóveis diretamente aos proprietários, oferecendo uma alternativa simples, profissional e livre das complicações da venda tradicional.',
+    'Combinamos conhecimento do mercado, análise rigorosa e um acompanhamento próximo para avaliar cada oportunidade e apresentar propostas claras e ajustadas. Cuidamos de cada detalhe para que não tenha de se preocupar com nada.',
   ],
-  tagline: 'Compramos diretamente. Tratamos de tudo. Simplificamos o processo.',
+  tagline: 'Compramos diretamente. Simplificamos cada decisão.',
 };
 window.UF_TEAM = [
   { name: 'Luís Poças', role: 'Gestor de Aquisições Imobiliárias', area: 'Negociação e desenvolvimento de oportunidades', photo: '/img/equipa/luis.jpg',
