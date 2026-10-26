@@ -37,6 +37,15 @@
     .soon-foot { position: relative; border-top: 1px solid rgba(255,255,255,.1); padding: 18px 20px 24px; font-size: 13px; color: #8F887E; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
     .soon-foot p { margin: 0; }
     .soon-foot a { color: #BDB6AB; }
+  
+/* Livro de Reclamações Eletrónico: the official logo, linked, in every footer
+   (DL 156/2005, art. 9.º-A as amended: visible and prominent on the site).
+   If the image is missing, the link shows as text. */
+.lre { display: inline-block; margin-top: 10px; line-height: 0; border-radius: 4px; }
+.lre img { display: block; width: 160px; height: auto; }
+.lre.lre-text { line-height: 1.4; border: 1px solid rgba(255,255,255,.35); padding: 6px 10px; color: #fff; }
+.lre.lre-text::after { content: 'Livro de Reclamações'; font-size: 13px; font-weight: 600; }
+.lre:focus-visible { outline: 2px solid #D9BE8C; outline-offset: 4px; }
   </style>
 </head>
 <body>
@@ -55,6 +64,7 @@
     </main>
     <footer class="soon-foot">
       <p>URBANFOCUS – LDA · NIPC 519136330 · Vila Franca de Xira</p>
+      <a class="lre" href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener" aria-label="Livro de Reclamações Eletrónico"><img src="/img/livro-reclamacoes.png" alt="Livro de Reclamações" width="160" height="29" loading="lazy" onerror="this.parentNode.classList.add('lre-text');this.remove()"></a>
       <p><a href="/termos">Termos e condições</a> · <a href="/privacidade">Privacidade</a> · <a href="/cookies">Cookies</a> · <a href="https://www.livroreclamacoes.pt/Inicio/" target="_blank" rel="noopener">Livro de Reclamações</a></p>
     </footer>
   </div>

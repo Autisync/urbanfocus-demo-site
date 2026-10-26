@@ -581,3 +581,42 @@ html.anim .reveal.is-in { opacity: 1; transform: none; }
 .story-dot { width: 10px; height: 10px; padding: 0; border-radius: 50%; border: 0; background: var(--line); cursor: pointer; transition: background .2s, transform .2s; }
 .story-dot[aria-current="true"] { background: var(--gold-deep); transform: scale(1.2); }
 @media (max-width: 560px) { .story-track .story { padding: 26px 22px; } }
+
+/* Livro de Reclamações Eletrónico: the official logo, linked, in every footer
+   (DL 156/2005, art. 9.º-A as amended: visible and prominent on the site).
+   If the image is missing, the link shows as text. */
+.lre { display: inline-block; margin-top: 16px; line-height: 0; border-radius: 4px; }
+.lre img { display: block; width: 160px; height: auto; }
+.lre.lre-text { line-height: 1.4; border: 1px solid rgba(255,255,255,.35); padding: 6px 10px; color: #fff; }
+.lre.lre-text::after { content: 'Livro de Reclamações'; font-size: 13px; font-weight: 600; }
+.lre:focus-visible { outline: 2px solid #D9BE8C; outline-offset: 4px; }
+
+/* Quem somos, in three parts: who we are (with the facts beside it), what we
+   promise and who you will deal with, and one closing call to action. */
+.about { padding: 72px 0; }
+.about-in { row-gap: 40px; }
+.about-copy p { margin-bottom: 12px; }
+.about-values, .about-end { grid-column: 1 / -1; }
+.about-values .values-title { margin: 0 0 14px; }
+.about-values .values { margin: 0; gap: 16px; }
+.about-values .values li { background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--gold); border-radius: var(--radius); padding: 18px 20px; }
+.about-values .values span { color: var(--ink-2); }
+.team { margin-top: 0; }
+.about-end { display: flex; align-items: center; justify-content: space-between; gap: 20px 32px; flex-wrap: wrap; background: var(--ink); color: #E9E4DB; border-radius: var(--radius); padding: 26px 30px; }
+.about-end p { margin: 0; color: #CFC8BC; max-width: 60ch; }
+.about-end p b { color: #fff; font-family: var(--serif); font-weight: 500; font-size: 21px; }
+.about-end p + p { margin-top: 6px; }
+.about-end .btn { flex: none; background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.about-end .btn:hover { background: #fff; border-color: #fff; }
+@media (max-width: 900px) { .about-values .values { grid-template-columns: 1fr; } }
+
+html.anim.calm .reveal { transform: none; transition: opacity .5s ease; transition-delay: var(--d, 0ms); }
+.story-play { margin-left: auto; border: 1px solid var(--line); background: var(--paper); color: var(--ink-2); font: inherit; font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 999px; cursor: pointer; }
+.story-play:hover { border-color: var(--ink); color: var(--ink); }
+/* On a phone the team is a row to swipe, so the section keeps its end in sight. */
+@media (max-width: 560px) {
+  .team-grid { display: flex; max-width: none; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 -20px; padding: 0 20px 8px; scrollbar-width: none; }
+  .team-grid::-webkit-scrollbar { display: none; }
+  .team-grid .member { flex: 0 0 80%; scroll-snap-align: center; }
+}
+.about-in > * { min-width: 0; }
