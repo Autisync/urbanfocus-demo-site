@@ -106,16 +106,70 @@ if (/[?&]preview\b/.test(location.search)) {
     var sec = document.querySelector('[data-stories]');
     var grid = document.querySelector('[data-story-grid]');
     if (sec && grid && stories.length) {
-      grid.innerHTML = stories.map(function (s) {
+      var slide = function (s, i) {
         var media = s.video
           ? '<video class="story-video" src="' + esc(s.video) + '"' + (s.photo ? ' poster="' + esc(s.photo) + '"' : '') + ' controls playsinline preload="none"></video>'
           : (s.photo ? '<img src="' + esc(s.photo) + '" alt="" loading="lazy">' : '');
-        return '<article class="story' + (s.video ? ' has-video' : '') + '">' + media +
+        return '<article class="story' + (s.video ? ' has-video' : '') + '" role="group" aria-roledescription="testemunho" aria-label="' + (i + 1) + ' de ' + stories.length + '">' + media +
           (s.situation || s.place ? '<p class="story-sit">' + esc(s.situation || '') + (s.situation && s.place ? ' · ' : '') + esc(s.place || '') + '</p>' : '') +
           (s.quote ? '<blockquote>' + esc(s.quote) + '</blockquote>' : '') +
           '<p class="story-name">' + esc(s.name || '') + '</p>' +
           (s.solved ? '<p class="story-solved">' + esc(s.solved) + '</p>' : '') + '</article>';
-      }).join('');
+      };
+      if (stories.length < 2) {
+        grid.innerHTML = stories.map(slide).join('');
+      } else {
+        // A carousel: one testimonial at a time, swipe or arrows, dots to jump,
+        // and it moves on by itself every 8 seconds unless the visitor is
+        // reading (hover, focus, touch) or has asked for less motion.
+        grid.className = 'story-carousel';
+        grid.setAttribute('role', 'region');
+        grid.setAttribute('aria-roledescription', 'carrossel');
+        grid.setAttribute('aria-label', 'Testemunhos de clientes');
+        grid.innerHTML = '<div class="story-track" tabindex="0">' + stories.map(slide).join('') + '</div>' +
+          '<div class="story-nav">' +
+            '<button type="button" class="story-btn" data-dir="-1" aria-label="Testemunho anterior">‹</button>' +
+            '<div class="story-dots">' + stories.map(function (_, i) { return '<button type="button" class="story-dot" data-i="' + i + '" aria-label="Ver o testemunho ' + (i + 1) + '"></button>'; }).join('') + '</div>' +
+            '<button type="button" class="story-btn" data-dir="1" aria-label="Testemunho seguinte">›</button>' +
+          '</div>';
+        var track = grid.querySelector('.story-track');
+        var dots = grid.querySelectorAll('.story-dot');
+        var at = 0;
+        var go = function (i, smooth) {
+          at = (i + stories.length) % stories.length;
+          track.scrollTo({ left: track.clientWidth * at, behavior: smooth === false ? 'auto' : 'smooth' });
+          mark();
+        };
+        var mark = function () { Array.prototype.forEach.call(dots, function (d, k) { d.setAttribute('aria-current', k === at ? 'true' : 'false'); }); };
+        grid.addEventListener('click', function (e) {
+          var b = e.target.closest('.story-btn'); if (b) { go(at + Number(b.getAttribute('data-dir'))); stop(); return; }
+          var d = e.target.closest('.story-dot'); if (d) { go(Number(d.getAttribute('data-i'))); stop(); }
+        });
+        var t0 = null;
+        track.addEventListener('scroll', function () {
+          clearTimeout(t0);
+          t0 = setTimeout(function () { var i = Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); if (i !== at) { at = i; mark(); } }, 80);
+        }, { passive: true });
+        track.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight') { e.preventDefault(); go(at + 1); stop(); }
+          if (e.key === 'ArrowLeft') { e.preventDefault(); go(at - 1); stop(); }
+        });
+        addEventListener('resize', function () { go(at, false); });
+        var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var timer = null, held = false;
+        var play = function () { if (calm || timer) return; timer = setInterval(function () { if (!held && !document.hidden) go(at + 1); }, 8000); };
+        var stop = function () { clearInterval(timer); timer = null; };
+        grid.addEventListener('mouseenter', function () { held = true; });
+        grid.addEventListener('mouseleave', function () { held = false; });
+        grid.addEventListener('focusin', function () { held = true; });
+        grid.addEventListener('focusout', function () { held = false; });
+        track.addEventListener('pointerdown', stop);
+        mark();
+        // Start moving only once it is on screen.
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { play(); o.disconnect(); } }, { threshold: 0.4 }).observe(grid);
+        } else play();
+      }
       sec.hidden = false;
     }
   });
