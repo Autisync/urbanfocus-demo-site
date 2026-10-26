@@ -131,6 +131,9 @@
     mins: function (m) { return m % 60 === 0 ? (m / 60) + (m === 60 ? ' hour' : ' hours') : m > 60 ? Math.floor(m / 60) + ' h ' + (m % 60) + ' min' : m + ' min'; },
   };
 
+  // A page can show a service under another name (window.BOOKING_NAMES); the
+  // CRM keeps its own, which is what bookings are matched and sent by.
+  function shown(svc) { var n = window.BOOKING_NAMES || {}; return (svc && n[svc.name]) || (svc && svc.name) || ''; }
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   }
@@ -304,7 +307,7 @@
       var html = '<div class="bk-list" role="radiogroup" aria-label="' + esc(t.steps[0]) + '">' + svcs.map(function (s) {
         var on = state.service && state.service.id === s.id, p = money(s.price, s.currency);
         return '<button type="button" role="radio" class="bk-option" aria-checked="' + !!on + '" data-service="' + esc(s.id) + '">' +
-          '<span class="bk-opt-main"><b>' + esc(s.name) + '</b><small>' + esc(t.mins(s.duration_minutes)) + '</small>' +
+          '<span class="bk-opt-main"><b>' + esc(shown(s)) + '</b><small>' + esc(t.mins(s.duration_minutes)) + '</small>' +
           (on && s.description ? '<span class="bk-desc">' + esc(s.description) + '</span>' : '') + '</span>' +
           '<span class="bk-price">' + esc(p || t.free) + '</span></button>';
       }).join('') + '</div>';
@@ -356,7 +359,7 @@
     function stepDetails() {
       var f = state.form, s = state.slot;
       // What they are booking, so a time picked from "Next free" is never a surprise.
-      var picked = s && state.service ? '<p class="bk-picked"><b>' + esc(state.service.name) + '</b><br>' + esc(fmtWhen(s)) +
+      var picked = s && state.service ? '<p class="bk-picked"><b>' + esc(shown(state.service)) + '</b><br>' + esc(fmtWhen(s)) +
         (s.staff ? ' · ' + esc(s.staff.name) : '') + ' <button type="button" class="bk-link" data-go="2">' + esc(t.change || 'Change') + '</button></p>' : '';
       return picked + '<form class="bk-form" novalidate data-track-ignore>' +
         '<div class="bk-two">' +
@@ -374,7 +377,7 @@
       var s = state.slot, svc = state.service, p = money(svc.price, svc.currency);
       var online = !!(svc.is_paid && p && (state.base.paymentMethods || []).length);
       var rows = [
-        [t.what, svc.name + ', ' + t.mins(svc.duration_minutes)],
+        [t.what, shown(svc) + ', ' + t.mins(svc.duration_minutes)],
         [t.when, fmtWhen(s)],
       ];
       if (s.staff && team().length > 1) rows.push([t.with, s.staff.name]);
@@ -403,7 +406,7 @@
       else if (state.done) {
         var d = state.done;
         html = '<div class="bk-body bk-done" role="status"><span class="bk-tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>' +
-          '<h3>' + esc(t.doneTitle) + '</h3><p class="bk-when">' + esc(d.service.name) + '<br>' + esc(fmtWhen(d.slot)) + (d.slot.staff && staffFor(state.base, d.service).length > 1 ? ' with ' + esc(firstName(d.slot.staff.name)) : '') + '</p>' +
+          '<h3>' + esc(t.doneTitle) + '</h3><p class="bk-when">' + esc(shown(d.service)) + '<br>' + esc(fmtWhen(d.slot)) + (d.slot.staff && staffFor(state.base, d.service).length > 1 ? ' with ' + esc(firstName(d.slot.staff.name)) : '') + '</p>' +
           '<p class="bk-muted">' + esc(t.doneText(d.email)) + '</p><button type="button" class="bk-ghost-btn" data-again>' + esc(t.another) + '</button></div>';
       } else {
         html = progress() + '<div class="bk-body">' +

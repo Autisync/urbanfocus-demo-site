@@ -19,15 +19,12 @@ window.UF_TEAM = [
 ];
 
 window.UF_STORIES = [
-  // {
-  //   situation: 'Herança com três herdeiros',
-  //   place: 'Alhandra',
-  //   quote: 'O que a pessoa disse, nas palavras dela.',
-  //   name: 'Maria',
-  //   solved: 'O que fizemos: falámos com os três irmãos, tratámos da habilitação e fizemos a escritura em 5 semanas.',
-  //   photo: '',  // optional, e.g. '/img/casos/alhandra.jpg'
-  //   video: '',  // optional, a vertical video testimonial, e.g. '/videos/maria.mp4' (with photo as its poster)
-  // },
+  // From the onboarding form (25 Oct 2026), in the clients' own words; Luís
+  // has their permission to publish them (oral; written confirmation to come).
+  { quote: "O processo de venda de um apartamento à Urban Focus decorreu da melhor forma. O que mais valorizei na relação com a empresa foi a confiança e a honestidade. Tudo decorreu com a máxima rapidez, no que dependeu dos responsáveis da empresa, e sempre com transparência. Numa altura em que o mercado da habitação está tão exuberante, é importante poder confiar nos parceiros com quem negociamos.", name: "Susana Santos" },
+  { quote: "Obrigado por tudo: pela simpatia, transparência, profissionalismo e competência. A venda do nosso apartamento foi uma experiência perfeita graças ao acompanhamento do Luís Poças que dominava todos os detalhes do processo transmitindo-nos deste sempre confiança e tranquilidade. Recomendo vivamente a UrbanFocus.", name: "Carlos Domingos" },
+  { quote: "Demonstra um real conhecimento do mercado imobiliário, quer na comercialização, quer nas questões técnicas inerentes ao imóvel. Linguagem simples e assertiva, transmitindo confiança em todo o processo. Apresenta soluções, elevada literacia financeira. Faz acontecer 💪 Recomendo.", name: "Ermelinda Pinto" },
+  { quote: "Excelente escolha para a venda de imóveis. Equipa muito profissional, competente e conhecedor do mercado. Bom trato, simpatia e responsabilidade.", name: "Carlos Marques" },
 ];
 
 /*
@@ -94,7 +91,7 @@ if (/[?&]preview\b/.test(location.search)) {
           ? '<video class="story-video" src="' + esc(s.video) + '"' + (s.photo ? ' poster="' + esc(s.photo) + '"' : '') + ' controls playsinline preload="none"></video>'
           : (s.photo ? '<img src="' + esc(s.photo) + '" alt="" loading="lazy">' : '');
         return '<article class="story' + (s.video ? ' has-video' : '') + '">' + media +
-          '<p class="story-sit">' + esc(s.situation || '') + (s.place ? ' · ' + esc(s.place) : '') + '</p>' +
+          (s.situation || s.place ? '<p class="story-sit">' + esc(s.situation || '') + (s.situation && s.place ? ' · ' : '') + esc(s.place || '') + '</p>' : '') +
           (s.quote ? '<blockquote>' + esc(s.quote) + '</blockquote>' : '') +
           '<p class="story-name">' + esc(s.name || '') + '</p>' +
           (s.solved ? '<p class="story-solved">' + esc(s.solved) + '</p>' : '') + '</article>';

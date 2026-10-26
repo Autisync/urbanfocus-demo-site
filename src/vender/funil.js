@@ -1,11 +1,11 @@
 /*!
- * Urban Focus — the seller funnel's form (vender/a and vender/b).
+ * UrbanFocus — the seller funnel's form (vender/a and vender/b).
  *
  * The form is a set of <fieldset class="step"> shown one at a time. Each step
  * lists what it needs in data-need ("zona tipologia"); the contact step is
  * checked here (name, a Portuguese phone, optional email, consent).
  *
- * The request goes to Urban Focus's seller form in the CRM
+ * The request goes to UrbanFocus's seller form in the CRM
  * (/api/public/lead-forms/<key>), which files the contact and a "Vender casa"
  * deal and tells the team. The page path (/vender/a or /vender/b) is sent as
  * "pagina", so every request says which page it came from.
@@ -19,7 +19,7 @@
   var C = window.SITE_CONFIG || {};
   var API = String(C.api || 'https://api.autisync.com/api').replace(/\/+$/, '');
   var APP = String(C.app || 'https://app.autisync.com').replace(/\/+$/, '');
-  var FORM_KEY = 'E9CLk_Qx7cE3cOUwRkt967m8'; // Urban Focus · "Pedido de proposta" (sell_home)
+  var FORM_KEY = 'E9CLk_Qx7cE3cOUwRkt967m8'; // UrbanFocus · "Pedido de proposta" (sell_home)
 
   if (C.trackKey) {
     var s = document.createElement('script');

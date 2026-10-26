@@ -111,3 +111,8 @@ legend { font-weight: 600; font-size: 17px; margin-bottom: 10px; padding: 0; }
   .lede { font-size: 16px; margin-bottom: 0; }
   .hero .ticks, .hero .note { display: none; }
 }
+
+/* Luís's wording, oct 2026: step names, six situations. */
+.steps3 .step-kicker { display: block; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-deep, #8C6C3A); margin-bottom: 2px; }
+.footnote { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
+@media (min-width: 760px) { .cases { grid-template-columns: repeat(3, minmax(0, 1fr)); } }

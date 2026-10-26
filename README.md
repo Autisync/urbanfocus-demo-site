@@ -22,6 +22,14 @@ Everything on it goes into the CRM account **Urban Focus**.
 No framework and no install. `build.mjs` copies `src/` to `dist/` and writes
 `dist/config.js`.
 
+## Under construction until approved
+
+`build.mjs` has `LIVE = false`: the production deployment (www.urbanfocus.pt)
+shows `src/em-construcao.html` on every page except Termos, Privacidade and
+Cookies, while preview deployments show the full site. Push the work to the
+`preview` branch and share its Vercel link for review. Once approved, set
+`LIVE = true` (or add `SITE_LIVE=1` in Vercel) and push to `main`.
+
 ## Vercel
 
 Import this repository, framework preset **Other**. Nothing else is needed:
