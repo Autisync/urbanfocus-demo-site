@@ -11,7 +11,7 @@
   --gold-deep: #8C6C3A;
   --muted: #5E5A55;
   --line: #D9D3CB;
-  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans: 'Montserrat', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --radius: 4px;
   /* The booking widget (shared/booking.js) takes its look from these. */
@@ -673,11 +673,18 @@ html.anim.calm .reveal { transform: none; transition: opacity .5s ease; transiti
 .how-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: stretch; }
 .how-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: none; padding: 0; margin: 0; min-height: 520px; }
 .how-photos img, .how-photos img:first-child, .how-photos img:last-child { position: static; width: 100%; height: calc(100% - 72px); min-height: 0; aspect-ratio: auto; object-fit: cover; margin: 0; border: 0; border-radius: 10px; box-shadow: 0 24px 50px -34px rgba(19, 22, 26, .5); }
-.how-photos img:first-child { align-self: start; object-position: 22% 88%; }
-.how-photos img:last-child { align-self: end; object-position: 62% 45%; }
+.how-photos img:first-child { align-self: start; object-position: 49% 62%; }
+.how-photos img:last-child { align-self: end; object-position: 42% 32%; }
 .how-in .steps { grid-template-columns: 1fr; gap: 22px; }
 @media (max-width: 900px) {
   .how-in { grid-template-columns: 1fr; gap: 32px; }
   .how-photos { min-height: 0; height: 420px; }
 }
 @media (max-width: 520px) { .how-photos { height: 340px; gap: 12px; } .how-photos img, .how-photos img:first-child, .how-photos img:last-child { height: calc(100% - 40px); } }
+
+/* Footer: the logo on its own line above, so the four columns (company,
+   Contactos, Vender a sua casa, Parceiros) start at the same height. */
+.footer-brand { padding-bottom: 8px; }
+.footer-brand .footer-logo { display: block; width: 170px; margin: -12px 0 -14px -18px; }
+.footer-4 > div > h3:first-child, .footer-4 > div > .footer-id:first-child { margin-top: 0; }
+.footer-4 .footer-id { margin-top: 0; }

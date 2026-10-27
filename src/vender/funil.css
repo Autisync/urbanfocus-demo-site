@@ -1,9 +1,9 @@
 /* Urban Focus — seller funnel (vender/a, vender/b). Same world as the site:
-   ink, warm stone, brass gold for the one thing to press, Fraunces + Montserrat. */
+   ink, warm stone, brass gold for the one thing to press, Newsreader + Montserrat. */
 :root {
   --ink: #13161A; --ink-2: #2A2E33; --stone: #EFEDEC; --stone-2: #E4E0DB; --paper: #FFFFFF;
   --gold: #B8935A; --gold-deep: #8C6C3A; --muted: #5E5A55; --line: #D9D3CB; --err: #A23B2A; --ok: #2F6B45;
-  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
   --sans: 'Montserrat', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 * { box-sizing: border-box; }
